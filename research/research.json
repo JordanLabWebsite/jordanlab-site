@@ -1,0 +1,14 @@
+{
+  "myelination": {
+    "title": "Myelination in neurodevelopmental disorders",
+    "body": "We investigate how disrupted myelination contributes to ASD-related phenotypes, combining mouse models, iPSC-derived cells, and in vivo imaging.supercrap"
+  },
+  "neuron_oligo": {
+    "title": "Neuron–oligodendrocyte signaling",
+    "body": "We map noncanonical synapses and activity-dependent pathways that regulate oligodendrocyte lineage maturation and sheath dynamics."
+  },
+  "actin_morphology": {
+    "title": "Molecular control of actin and morphology",
+    "body": "We study Rac1/actin pathways and ANKS1B/AIDA-1 function across neurons and oligodendrocyte lineage cells to link cell shape to behavior."
+  }
+}

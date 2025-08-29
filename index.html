@@ -1,0 +1,996 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>JordanLab • Neuroscience at Albert Einstein College of Medicine</title>
+    <meta name="description" content="JordanLab investigates how oligodendrocytes, myelination, and circuit development shape brain function and neurodevelopmental disorders." />
+
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='0.9em' font-size='90'>🧠</text></svg>">
+
+    <style>
+      :root {
+        --bg: #0b0c10;
+        --panel: #14161b;
+        --text: #e8eef2;
+        --muted: #9aa7b4;
+        --accent: #60a5fa;
+        --accent-2: #34d399;
+        --maxw: 1150px;
+      }
+      * { box-sizing: border-box; }
+      html, body { height: 100%; }
+      body {
+        margin: 0; color: var(--text);
+        font: 16px/1.6 system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+        background: radial-gradient(1200px 800px at 20% -10%, rgba(96,165,250,.14), transparent 60%),
+                    radial-gradient(900px 600px at 110% 10%, rgba(52,211,153,.10), transparent 60%),
+                    var(--bg);
+      }
+      a { color: var(--accent); text-decoration: none; }
+      a:hover { text-decoration: underline; }
+      .container { width: 100%; max-width: var(--maxw); margin: 0 auto; padding: 0 1.25rem; }
+
+      /* Nav */
+/* HEADER BAR (logo + menus) */
+header {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+
+  /* Background image always fully visible */
+  background: url("images/header-bg.jpg") center center no-repeat;
+  background-size: contain;   /* whole image shown, no cropping */
+
+  /* Optional fallback color if image doesn’t cover the bar fully */
+  background-color: #1a2a6c;  
+
+  border-bottom: 1px solid rgba(148,163,184,.2);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.25);
+}
+	/* dark overlay to keep text readable */
+header::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0.55); 
+  z-index: -1;
+}	
+   .nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  height: 150px;          /* was 64px → taller bar */
+  padding: 0 2rem;
+}
+
+.brand {
+  display: inline-flex;
+  align-items: center;
+  gap: .8rem;
+  font-weight: 800;
+  font-size: 1.8rem;       /* bigger logo text */
+  color: yellowgreen;
+  font-family: Arial, sans-serif;
+}
+
+.brand .logo {
+  width: 100px;             /* bigger logo image */
+  height: auto;
+  border-radius: 8px;
+}
+      .menu { display: flex; gap: 1rem; align-items: center; }
+.menu a {
+  font-size: 1.4rem;       /* bigger menu font */
+  padding: 0.5rem 1rem;
+  color: var(--text);
+  opacity: .9;
+}
+.menu a:hover { opacity: 1; }
+      .menu-toggle { display: none; font-size: 1.3rem; background: none; border: 1px solid rgba(148,163,184,.3); color: var(--text); padding: .4rem .6rem; border-radius: .6rem; }
+
+      /* Hero */
+      .hero { padding: 5rem 0 3rem; text-align: center;
+			 background: url("images/Background.jpg") no-repeat center center;
+  			background-size: cover;    /* make it fill the whole section */
+		    background-attachment: fixed; /* this makes the background image fixed*/
+ 			 position: relative;        /* needed for overlay trick below */
+		 	 z-index: 0;}
+		.hero::before {
+ 			 content: "";
+ 			 position: absolute;
+ 			 top: 0; left: 0; right: 0; bottom: 0;
+  				background: rgba(0, 0, 0, 0.6);  /* black overlay at 40% transparency */
+  				z-index: -1;  /* sits behind the text */}
+      .hero h1 { font-size: clamp(2rem, 6vw, 3.2rem); line-height: 1.15; margin: 0 0 .6rem; }
+      .hero p { color: var(--muted); margin: 0 auto 1.2rem; max-width: 70ch; }
+ .cta-grid {
+  display: flex;
+  justify-content: center;   /* center row in hero */
+  gap: 2rem;                 /* space between each item */
+  flex-wrap: wrap;           /* allow stacking on smaller screens */
+  margin-top: 2rem;
+  width: 100%;
+  max-width: 1200px;         /* optional: keep row from stretching too wide */
+}
+
+.cta-item {
+  flex: 1 1 0;               /* all items share space equally */
+  min-width: 250px;          /* don’t shrink too small */
+  max-width: 350px;          /* optional cap for nicer balance */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.cta-item .btn {
+  margin-bottom: 0.6rem;
+  white-space: normal;       /* button text can wrap */
+  text-align: center;
+  width: 100%;               /* make buttons same width inside card */
+}
+
+.cta-item p {
+  font-size: 0.95rem;
+  line-height: 1.4;
+  color: #d1d5db;
+}
+
+
+      .btn { display: inline-flex; align-items: center; justify-content: center; padding: .8rem 1.1rem; border-radius: .8rem; border: 1px solid rgba(148,163,184,.25); font-weight: 600; }
+      .btn.primary { background: linear-gradient(135deg, var(--accent), var(--accent-2)); color: #0b0c10; border-color: transparent; }
+
+      /* Sections */
+      .section { padding: 4rem 0; }
+      .section h2 { margin: 0 0 1rem; font-size: 1.6rem; }
+
+      /* Research */
+      .grid { display: grid; gap: 1.2rem; grid-template-columns: repeat(3, minmax(0, 1fr)); }
+      .card { background: var(--panel); border: 1px solid rgba(148,163,184,.15); border-radius: 1rem; padding: 1.2rem; }
+      .card h3 { margin: 0 0 .4rem; font-size: 1.1rem; }
+      .card p { margin: 0; color: var(--muted); }
+		
+/* Thin, flexible Overview band (auto-height) */
+.overview {
+  position: relative;
+  background: linear-gradient(180deg, #1c1f2a, #2c3145); /* deep gradient */
+  color: #f0f4ff;         /* light text */
+  padding: 2.5rem 0;
+  border-top: 1px solid rgba(255,255,255,0.1);
+  border-bottom: 1px solid rgba(255,255,255,0.1);
+}
+
+.overview::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: url("images/overview-bg.jpg") center/cover no-repeat;
+  opacity: 0.2;                      /* subtle texture; safe to remove */
+  pointer-events: none;
+}
+
+.overview h2 {
+  margin: 0 0 .5rem;
+  font-size: clamp(1.5rem, 2.2vw, 1.9rem);
+	font-weight: 800;     /* bold */
+  color: #ffffff;         /* brighter heading */
+	 text-align: center;   /* centers "Our Focus" */
+}
+
+/* Desktop/tablet: let it be wide */
+.overview-text { max-width: none;   font-size: 1.2rem;    /* larger body text (default ~1rem) */
+  font-weight: 500;     /* medium boldness; use 600–700 for full bold */
+  line-height: 1.7;     /* controls spacing between lines */
+  color: #d4d9e6; }
+
+/* Phones: re-cap the line length so it’s easy to read */
+@media (max-width: 640px) {
+  .overview-text {
+    max-width: 70ch;   /* readable line length on small screens */
+  }
+}
+
+
+		/* Research at a glance */
+.glance-grid {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.glance-card {
+  position: relative;
+  background: var(--panel);
+  border: 1px solid rgba(148,163,184,.15);
+  border-radius: 1rem;
+  overflow: hidden;
+  min-height: 220px;
+}
+
+.glance-card a {
+  color: inherit;
+  text-decoration: none;
+  display: block;
+  height: 100%;
+}
+
+.glance-media {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;      /* consistent thumbs */
+  overflow: hidden;
+}
+
+.glance-media img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;  /* no cropping */
+  background: #0f141b;  /* optional matte behind the image */
+}
+
+.glance-card:hover .glance-media img {
+  transform: scale(1.04);
+}
+
+.glance-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(0,0,0,.55), rgba(0,0,0,.15), rgba(0,0,0,0));
+}
+
+.glance-body {
+  padding: .9rem;
+}
+
+.glance-title {
+  font-weight: 700;
+  margin: 0 0 .25rem;
+}
+
+.glance-meta {
+  font-size: .95rem;
+  color: var(--muted);
+}
+
+.glance-summary {
+  margin-top: .4rem;
+  color: var(--muted);
+  font-size: .95rem;
+}
+
+/* Responsive: stack on small screens */
+@media (max-width: 900px) {
+  .glance-grid { grid-template-columns: 1fr; }
+}
+
+
+      /* People */
+.people-grid {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(3, minmax(0, 1fr));  /* desktop default */
+}
+		/* tablets */
+@media (max-width: 1024px) {
+  .people-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+/* phones */
+@media (max-width: 640px) {
+  .people-grid {
+    grid-template-columns: 1fr;
+  }
+}
+      .person { background: var(--panel); border: 1px solid rgba(148,163,184,.15); border-radius: 1rem; overflow: hidden; }
+/* Base person card style */
+/* People grid stays 3/2/1 columns as you set earlier */
+
+/* People grid stays 3/2/1 columns as you set earlier */
+
+/* Card */
+.person {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0.75rem;
+  border-radius: 12px;
+  background: rgba(255,255,255,0.02);
+  transition: transform .25s ease, box-shadow .25s ease;
+}
+.person:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.25);
+}
+
+/* Media frame + overlay */
+.person-media {
+  position: relative;
+  width: 100%;
+  border-radius: 12px;
+  overflow: hidden;
+}
+.person-media img {
+  width: 100%;
+  aspect-ratio: 3 / 4;      /* equal-height portraits */
+  object-fit: contain;      /* no cropping faces */
+  background: #0f141b;
+  display: block;
+  transition: transform .35s ease, filter .25s ease;
+}
+
+/* Hidden bio overlay shown on hover/focus */
+.person-overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: flex-end;
+  padding: .8rem .9rem;
+  color: #fff;
+  background: linear-gradient(to top, rgba(0,0,0,.75), rgba(0,0,0,0) 55%);
+  opacity: 0;
+  transition: opacity .25s ease;
+  font-size: 0.95rem;
+  line-height: 1.4;
+}
+.person:hover .person-overlay,
+.person:focus-within .person-overlay { opacity: 1; }
+.person:hover img { filter: brightness(0.75); transform: scale(1.02); }
+
+/* Text below image */
+.p-name { font-weight: 700; margin-top: .55rem; text-align: center; }
+.p-role { color: var(--muted, #9aa7b4); font-size: 0.95rem; text-align: center; }
+.p-interest { color: var(--muted, #9aa7b4); font-size: 0.95rem; text-align: center; margin-top: .15rem; }
+
+
+/* Text below image */
+.p-name { font-weight: 700; margin-top: .55rem; text-align: center; }
+.p-role { color: var(--muted, #9aa7b4); font-size: 0.95rem; text-align: center; }
+.p-interest { color: var(--muted, #9aa7b4); font-size: 0.95rem; text-align: center; margin-top: .15rem; }
+
+      /* Publications */
+      .pubs { display: grid; gap: .8rem; }
+      .pub { background: var(--panel); border: 1px solid rgba(148,163,184,.15); border-radius: .8rem; padding: .9rem; }
+      .pub .title { font-weight: 650; }
+      .pub .meta { color: var(--muted); font-size: .95rem; }
+		
+		/* Alumni grid: smaller cards than .people-grid */
+.alumni-grid {
+  display: grid;
+  gap: 0.75rem;
+  grid-template-columns: repeat(4, minmax(0, 1fr));  /* desktop: 4 across */
+}
+
+/* tablets */
+@media (max-width: 1024px) {
+  .alumni-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+}
+
+/* phones */
+@media (max-width: 640px) {
+  .alumni-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+
+.alumni-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0.5rem;
+  border-radius: 10px;
+  background: rgba(255,255,255,0.02);
+  transition: transform .2s ease, box-shadow .2s ease;
+}
+.alumni-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 6px 16px rgba(0,0,0,0.22);
+}
+
+.alumni-card img {
+  width: 100%;
+  aspect-ratio: 3 / 4;        /* consistent portrait frame */
+  object-fit: contain;         /* don’t crop faces */
+  background: #0f141b;
+  border-radius: 10px;
+  display: block;
+}
+
+.alumni-name {
+  margin-top: .45rem;
+  font-weight: 600;
+  text-align: center;
+  font-size: 0.98rem;          /* smaller than People names */
+  color: var(--text, #e5e7eb);
+}
+		.alumni-position {
+  font-size: 0.85rem;
+  color: var(--muted, #9aa7b4);
+  text-align: center;
+  margin-top: 0.2rem;
+}
+
+.alumni-location {
+  font-size: 0.8rem;
+  color: #b0bbc8;
+  text-align: center;
+  margin-top: 0.15rem;
+}
+
+
+/* Gallery grid */
+.gallery-grid {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+}
+
+		/* Wrap each image so we can position an overlay */
+.gallery-item {
+  position: relative;
+  border-radius: 12px;
+  overflow: hidden;
+  background: #0f141b;
+}
+		/* The image */
+.gallery-item img {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;               /* or 'contain' if you prefer no cropping */
+  transition: filter .25s ease, transform .25s ease;
+}
+		/* The overlay caption (hidden by default) */
+.gallery-caption {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: flex-end;           /* caption near bottom */
+  padding: .75rem .9rem;
+  color: #fff;
+  background: linear-gradient(to top, rgba(0,0,0,.65), rgba(0,0,0,.0) 55%);
+  opacity: 0;
+  transition: opacity .25s ease;
+  font-size: .95rem;
+}
+		
+/* Hover: dim image and reveal caption */
+.gallery-item:hover img {
+  filter: brightness(0.6);
+  transform: scale(1.02);
+}
+.gallery-item:hover .gallery-caption {
+  opacity: 1;
+}
+		/* Keyboard accessibility: show on focus too */
+.gallery-item:focus-within .gallery-caption,
+.gallery-item:focus-visible .gallery-caption {
+  opacity: 1;
+}
+
+/* Optional: always show caption on small touch screens */
+@media (max-width: 640px) {
+  .gallery-caption { opacity: 1; }
+  .gallery-item img { filter: brightness(0.8); }
+}
+.gallery-grid img {
+  width: 100%;
+  height: auto;
+  border-radius: 12px;
+  object-fit: cover;
+  transition: transform .25s ease;
+}
+
+.gallery-grid img:hover {
+  transform: scale(1.05);
+}
+		/* Scrollable publications box */
+.pub-scroll {
+  max-height: 28rem;            /* tweak to show ~8 items on desktop */
+  overflow-y: auto;             /* vertical scrollbar when needed */
+  padding-right: .5rem;         /* space so text isn't under the scrollbar */
+  border: 1px solid #1f2937;    /* subtle border to “box” it */
+  border-radius: 12px;
+  background: rgba(0,0,0,0.2);  /* optional: faint background */
+}
+
+/* Smoother scroll on touch devices */
+.pub-scroll {
+  -webkit-overflow-scrolling: touch;
+}
+
+/* Optional: make each pub a bit tighter so more fit */
+.pub { margin: 0 0 .9rem 0; }
+.pub .title { font-weight: 600; }
+.pub .meta { font-size: 0.95rem; color: var(--muted, #9aa7b4); }
+
+}
+
+      /* Gallery */
+      .gallery { display: grid; grid-template-columns: repeat(6, 1fr); gap: .6rem; }
+      .gallery img { width: 100%; height: 170px; object-fit: cover; border-radius: .6rem; border: 1px solid rgba(148,163,184,.2); }
+      .gallery .wide { grid-column: span 2; }
+      .gallery .tall { grid-row: span 2; height: 350px; }
+
+      /* Join */
+      .list { display: grid; gap: .6rem; }
+      .list li { margin-left: 1rem; }
+
+      /* Contact */
+      form { display: grid; gap: .8rem; }
+      input, textarea { width: 100%; padding: .75rem .9rem; border-radius: .6rem; border: 1px solid rgba(148,163,184,.25); background: #0f1116; color: var(--text); }
+      textarea { min-height: 140px; }
+
+      footer { padding: 3rem 0; color: var(--muted); text-align: center; border-top: 1px solid rgba(148,163,184,.15); }
+
+      /* Responsive */
+      @media (max-width: 1100px) { .people-grid { grid-template-columns: repeat(3, 1fr);} .gallery { grid-template-columns: repeat(4, 1fr);} }
+      @media (max-width: 800px) { .grid { grid-template-columns: 1fr; } .two-col { grid-template-columns: 1fr; } .people-grid { grid-template-columns: repeat(2, 1fr);} .gallery { grid-template-columns: repeat(3, 1fr);} }
+      @media (max-width: 600px) { .people-grid { grid-template-columns: 1fr;} .gallery { grid-template-columns: repeat(2, 1fr);} .menu-toggle { display: inline-flex; } .menu { display: none; position: absolute; right: 1.25rem; top: 70px; background: var(--panel); border: 1px solid rgba(148,163,184,.2); border-radius: .8rem; padding: .6rem; flex-direction: column; min-width: 240px; } .menu.open { display: flex; } }
+    </style>
+  </head>
+  <body>
+    <header>
+      <div class="container nav">
+        <a class="brand" href="#home" aria-label="Home">
+          <img class="logo" src="images/lablogo.png" alt="Jordan Lab logo"/>
+          <span>JordanLab</span>
+        </a>
+        <button class="menu-toggle" aria-label="Open menu" aria-controls="nav-menu" aria-expanded="false">☰</button>
+        <nav id="nav-menu" class="menu" aria-label="Main navigation">
+          <a href="#research">Research</a>
+          <a href="#people">People</a>
+          <a href="#publications">Publications</a>
+          <a href="#news">News</a>
+          <a href="#gallery">Gallery</a>
+          <a href="#join">Join</a>
+          <a href="#contact">Contact</a>
+        </nav>
+      </div>
+    </header>
+
+    <main id="home">
+
+		<section class="hero container">
+  <h1>JordanLab</h1>
+  <p>
+    Department of Neuroscience • Albert Einstein College of Medicine. 
+    We study how oligodendrocytes, myelination, and neuron–glia interactions 
+    shape circuit development and neurodevelopmental disorders.
+  </p>
+
+  <div class="cta-grid">
+    <!-- Publications -->
+    <div class="cta-item">
+      <a class="btn primary" href="#publications">
+        View Our Publications
+      </a>
+      <p class="muted">
+        Explore our published work on neurons, oligodendrocytes, and circuit plasticity.
+      </p>
+    </div>
+
+    <!-- Rare Genetic Disorders -->
+    <div class="cta-item">
+      <a class="btn primary" href="https://www.youtube.com/watch?v=At2dfsB_0jw" target="_blank" rel="noopener">
+        Our Efforts in Rare Genetic Disorders
+      </a>
+      <p class="muted">
+        Watch how our lab works to uncover mechanisms of rare genetic brain disorders.
+      </p>
+    </div>
+
+    <!-- IDD Gene Team -->
+    <div class="cta-item">
+      <a class="btn primary" href="https://einsteinmed.edu/centers/iddrc" target="_blank" rel="noopener">
+        IDD Gene Team at Einstein
+      </a>
+      <p class="muted">
+        Learn about our collaborative efforts with clinicians, families, and scientists 
+        to advance intellectual and developmental disabilities research.
+      </p>
+    </div>
+  </div>
+</section>
+
+		
+<!-- Overview (goes after the hero, before Research at a Glance) -->
+<section id="overview" class="overview">
+  <div class="container">
+    <h2>Our Focus</h2>
+    <p class="overview-text">
+      The Jordan Lab investigates how cellular and molecular interactions between neurons and glia shape brain development, and how their disruption contributes to neurodevelopmental disorders (NDDs). Emerging evidence shows that many monogenic NDDs, including those caused by mutations in ANKS1B, SHANK3, SYNGAP1, and NLGN, cannot be explained by defects in a single cell type alone. For example, our work has demonstrated that ANKS1B encodes a protein with critical roles in both neurons, where it regulates synaptic plasticity, and oligodendrocytes, where it controls myelination. Disruption in either cell type produces distinct yet converging cellular, circuit, and behavioral abnormalities. A central theme of our research is that only by defining how different brain cell types interact to drive NDDs can we uncover the true mechanisms of disease and develop effective, targeted therapies.
+    </p>
+  </div>
+</section>
+
+<section id="research" class="section container">
+  <h2>Research at a Glance</h2>
+  <div id="glance-grid" class="glance-grid" role="list" aria-live="polite">
+    <article class="card" role="listitem">
+      <p class="muted">Loading research…</p>
+    </article>
+  </div>
+</section>
+
+ <section id="people" class="section container">
+  <h2>People</h2>
+  <div id="people-grid" class="people-grid"></div>
+</section>
+
+  <section id="publications" class="section container">
+  <h2>Publications</h2>
+	  <div class="pub-scroll">
+  <div id="pub-list" aria-live="polite">
+    <p class="muted">Loading publications…</p>
+  </div>
+	</div>
+</section>
+		<section id="alumni" class="section container">
+  <h2>Previous Lab Members</h2>
+  <div id="alumni-grid" class="alumni-grid" aria-live="polite">
+    <p class="muted">Loading alumni…</p>
+  </div>
+</section>
+
+      <section id="news" class="section container">
+        <h2>News</h2>
+        <ul class="list">
+          <li><strong>Aug 2025:</strong> Congrats to Annie on the sequencing course acceptance!</li>
+          <li><strong>Jun 2025:</strong> New preprint on AIDA-1 and Rac1 in neuron–glia coupling.</li>
+          <li><strong>Jan 2025:</strong> Welcome new PhD students to the lab.</li>
+        </ul>
+      </section>
+
+     <section id="gallery" class="section container">
+  <h2>Gallery</h2>
+  <div id="gallery-grid" class="gallery-grid" aria-live="polite">
+    <p class="muted">Loading gallery…</p>
+  </div>
+</section>
+
+      <section id="join" class="section container">
+        <h2>Join Us</h2>
+        <p>We welcome curious, rigorous scientists at all stages. To apply, email your CV and a brief statement of interests.</p>
+        <ul class="list">
+          <li><strong>Postdocs:</strong> Experience in glia biology, imaging, or proteomics is a plus.</li>
+          <li><strong>PhD students:</strong> Rotations available in neuron–glia signaling and myelination.</li>
+          <li><strong>Research staff:</strong> Cell culture and mouse experience helpful.</li>
+        </ul>
+      </section>
+
+      <section id="contact" class="section container">
+        <h2>Contact</h2>
+        <p class="muted">Department of Neuroscience, Albert Einstein College of Medicine, Bronx, NY</p>
+        <form action="#" method="post" onsubmit="alert('This is a demo form. Connect it to a backend or form service.'); return false;">
+          <label>
+            Name
+            <input name="name" required />
+          </label>
+          <label>
+            Email
+            <input type="email" name="email" required />
+          </label>
+          <label>
+            Message
+            <textarea name="message" required></textarea>
+          </label>
+          <button class="btn primary" type="submit">Send message</button>
+        </form>
+      </section>
+    </main>
+
+    <footer>
+      <div class="container">
+        <div>© <span id="year"></span> JordanLab • Einstein Neuroscience</div>
+        <div class="muted" style="margin-top:.5rem">Supported by NIH and foundations. Views are those of the authors and do not necessarily represent the views of the NIH.</div>
+      </div>
+    </footer>
+
+    <script>
+      // Mobile menu toggle
+      const toggle = document.querySelector('.menu-toggle');
+      const menu = document.getElementById('nav-menu');
+      toggle?.addEventListener('click', () => {
+        const open = menu.classList.toggle('open');
+        toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+      });
+      // Smooth scroll for same-page links
+      document.querySelectorAll('a[href^="#"]').forEach(a => {
+        a.addEventListener('click', e => {
+          const href = a.getAttribute('href');
+          if (href && href.length > 1) {
+            e.preventDefault();
+            document.querySelector(href)?.scrollIntoView({ behavior: 'smooth' });
+            menu.classList.remove('open');
+            toggle.setAttribute('aria-expanded', 'false');
+			
+          }
+        });
+      });
+      // Year
+      document.getElementById('year').textContent = new Date().getFullYear();
+
+    
+    </script>
+	  <script>
+  // Load research content from JSON and inject into the three cards
+  fetch('research/research.json')
+    .then(res => {
+      if (!res.ok) throw new Error('Network response was not ok');
+      return res.json();
+    })
+    .then(data => {
+      // Myelination
+      document.getElementById('myelination-title').textContent = data.myelination.title;
+      document.getElementById('myelination-body').textContent  = data.myelination.body;
+
+      // Neuron–oligodendrocyte signaling
+      document.getElementById('neuron-oligo-title').textContent = data.neuron_oligo.title;
+      document.getElementById('neuron-oligo-body').textContent  = data.neuron_oligo.body;
+
+      // Molecular control of actin and morphology
+      document.getElementById('actin-morphology-title').textContent = data.actin_morphology.title;
+      document.getElementById('actin-morphology-body').textContent  = data.actin_morphology.body;
+    })
+    .catch(err => {
+      console.error('Failed to load research.json:', err);
+    });
+</script>
+	  <script>
+  document.addEventListener('DOMContentLoaded', () => {
+    console.log('Starting fetch…');
+    fetch('research/research.json?v=' + Date.now())
+      .then(res => {
+        console.log('research.json status:', res.status);
+        if (!res.ok) throw new Error('Network not ok: ' + res.status);
+        return res.json();
+      })
+      .then(data => {
+        console.log('JSON loaded:', data);
+        document.getElementById('myelination-title').textContent       = data.myelination.title;
+        document.getElementById('myelination-body').textContent        = data.myelination.body;
+        document.getElementById('neuron-oligo-title').textContent      = data.neuron_oligo.title;
+        document.getElementById('neuron-oligo-body').textContent       = data.neuron_oligo.body;
+        document.getElementById('actin-morphology-title').textContent  = data.actin_morphology.title;
+        document.getElementById('actin-morphology-body').textContent   = data.actin_morphology.body;
+      })
+      .catch(err => {
+        console.error('Failed to load research.json:', err);
+        const el = document.getElementById('myelination-body');
+        if (el) el.textContent = 'Error loading research content.';
+      });
+  });
+</script>
+	  
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  const grid = document.getElementById('people-grid');
+  if (!grid) return;
+
+  const esc = s => String(s || '').replace(/[&<>"']/g, m =>
+    ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]
+  ));
+
+  fetch('people/people.json?v=' + Date.now())
+    .then(r => { if (!r.ok) throw new Error(r.status); return r.json(); })
+    .then(list => {
+      grid.innerHTML = '';
+      list.forEach(p => {
+        const img = p.img || 'images/placeholder.jpg';
+        const card = document.createElement('article');
+        card.className = 'person';
+        card.innerHTML = `
+          <div class="person-media">
+            <img src="${esc(img)}" alt="${esc(p.name)} portrait" loading="lazy">
+            ${p.bio ? `<div class="person-overlay">${esc(p.bio)}</div>` : ''}
+          </div>
+          <div class="p-name">${esc(p.name || '')}</div>
+          <div class="p-role">${esc(p.role || '')}</div>
+          ${p.interest ? `<div class="p-interest">${esc(p.interest)}</div>` : ''}
+        `;
+        grid.appendChild(card);
+      });
+      if (!list.length) grid.innerHTML = '<p class="muted">No lab members listed yet.</p>';
+    })
+    .catch(err => {
+      console.error('people.json error:', err);
+      grid.innerHTML = '<p class="muted">Could not load lab members.</p>';
+    });
+});
+</script>
+
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  const escapeHTML = s => String(s || '').replace(/[&<>"']/g, m =>
+    ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]
+  ));
+
+  fetch('publications.json?v=' + Date.now())   // cache-bust while editing
+    .then(res => {
+      if (!res.ok) throw new Error('Network not ok: ' + res.status);
+      return res.json();
+    })
+    .then(items => {
+      // sort newest → oldest (by year; if years equal, keep order)
+      items.sort((a, b) => (b.year || 0) - (a.year || 0));
+
+      const list = document.getElementById('pub-list');
+      list.innerHTML = '';
+
+      items.forEach(p => {
+        const title   = escapeHTML(p.title);
+        const authors = escapeHTML(p.authors);
+        const venue   = escapeHTML(p.venue);
+        const year    = escapeHTML(p.year);
+
+        const pmid  = p.pmid  ? String(p.pmid).trim()  : '';
+        const pmcid = p.pmcid ? String(p.pmcid).trim() : '';
+        const doi   = p.doi   ? String(p.doi).trim()   : '';
+
+        const links = [
+          pmid  ? `<a href="https://pubmed.ncbi.nlm.nih.gov/${pmid}/" target="_blank" rel="noopener">PMID:${pmid}</a>` : '',
+          pmcid ? `<a href="https://www.ncbi.nlm.nih.gov/pmc/articles/${pmcid}/" target="_blank" rel="noopener">PMCID:${pmcid}</a>` : '',
+          doi   ? `<a href="https://doi.org/${encodeURIComponent(doi)}" target="_blank" rel="noopener">DOI</a>` : ''
+        ].filter(Boolean).join(' · ');
+
+        const el = document.createElement('div');
+        el.className = 'pub';
+        el.innerHTML = `
+          <div class="title">${title}</div>
+          <div class="meta">${authors}. <em>${venue}</em> (${year}). ${links}</div>
+        `;
+        list.appendChild(el);
+      });
+
+      if (!items.length) {
+        list.innerHTML = '<p class="muted">No publications to display.</p>';
+      }
+    })
+    .catch(err => {
+      console.error('Failed to load publications.json:', err);
+      const list = document.getElementById('pub-list');
+      if (list) list.innerHTML = '<p class="muted">Could not load publications.</p>';
+    });
+});
+</script>
+	<script>
+document.addEventListener('DOMContentLoaded', () => {
+  const escapeHTML = s => String(s || '').replace(/[&<>"']/g, m =>
+    ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]
+  ));
+
+  const grid = document.getElementById('glance-grid');
+  fetch('research/research_glance.json?v=' + Date.now())
+    .then(r => {
+      if (!r.ok) throw new Error('Network ' + r.status);
+      return r.json();
+    })
+    .then(items => {
+      grid.innerHTML = '';
+      items.forEach(item => {
+        const pmid = item.pmid ? String(item.pmid).trim() : '';
+        const href = pmid
+          ? `https://pubmed.ncbi.nlm.nih.gov/${pmid}/`
+          : '#';
+
+        const card = document.createElement('article');
+        card.className = 'glance-card';
+        card.setAttribute('role', 'listitem');
+
+        card.innerHTML = `
+          <a href="${href}" target="_blank" rel="noopener">
+            <div class="glance-media" aria-hidden="true">
+              <img src="${escapeHTML(item.img || 'images/placeholder.jpg')}" alt="">
+              <div class="glance-overlay"></div>
+            </div>
+            <div class="glance-body">
+              <div class="glance-title">${escapeHTML(item.title || '')}</div>
+              <div class="glance-meta">${pmid ? 'PMID: ' + pmid : ''}</div>
+              ${item.summary ? `<p class="glance-summary">${escapeHTML(item.summary)}</p>` : ''}
+            </div>
+          </a>
+        `;
+        grid.appendChild(card);
+      });
+
+      if (!items.length) {
+        grid.innerHTML = '<article class="card"><p class="muted">No research items available.</p></article>';
+      }
+    })
+    .catch(err => {
+      console.error('Failed to load research_glance.json:', err);
+      grid.innerHTML = '<article class="card"><p class="muted">Could not load research items.</p></article>';
+    });
+});
+</script>
+  
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  fetch('gallery.json?v=' + Date.now())
+    .then(r => r.json())
+    .then(images => {
+      const grid = document.getElementById('gallery-grid');
+      grid.innerHTML = '';
+      images.forEach(img => {
+        const item = document.createElement('div');
+        item.className = 'gallery-item';
+        // If you want keyboard focus/enter to also show overlay, wrap in a link:
+        item.innerHTML = `
+          <img src="${img.src}" alt="${(img.alt || 'Gallery image').replace(/"/g,'&quot;')}" loading="lazy">
+          ${img.caption ? `<div class="gallery-caption">${img.caption}</div>` : ''}
+        `;
+        grid.appendChild(item);
+      });
+    })
+    .catch(err => {
+      console.error('Gallery load failed:', err);
+      document.getElementById('gallery-grid').innerHTML = '<p class="muted">No images found.</p>';
+    });
+});
+</script>
+	  
+	  <script>
+document.addEventListener('DOMContentLoaded', () => {
+  const grid = document.getElementById('alumni-grid');
+  if (!grid) return;
+
+  fetch('alumni.json?v=' + Date.now())
+    .then(res => {
+      if (!res.ok) throw new Error('Network ' + res.status);
+      return res.json();
+    })
+    .then(list => {
+      grid.innerHTML = '';
+      list.forEach(p => {
+        const card = document.createElement('article');
+        card.className = 'alumni-card';
+        const src = p.img || 'images/placeholder.jpg';
+       card.innerHTML = `
+  <img src="${src}" alt="${(p.name || 'Alumnus').replace(/"/g,'&quot;')}" loading="lazy">
+  <div class="alumni-name">${p.name || ''}</div>
+  ${p.position ? `<div class="alumni-position">${p.position}</div>` : ''}
+  ${p.location ? `<div class="alumni-location">${p.location}</div>` : ''}
+`;
+
+        grid.appendChild(card);
+      });
+      if (!list.length) grid.innerHTML = '<p class="muted">No alumni listed yet.</p>';
+    })
+    .catch(err => {
+      console.error('Failed to load alumni.json:', err);
+      grid.innerHTML = '<p class="muted">Could not load alumni.</p>';
+    });
+});
+</script>
+    <!--
+    🧭 HOW TO USE
+    1) Click "Download" on the canvas → save as index.html.
+    2) Replace placeholder text & images with your lab content.
+    3) To keep images tidy, create an /images folder and update <img src> paths.
+
+    🚀 HOSTING (so it does NOT run from your computer)
+    A host is just a server on the internet that serves your files to anyone who visits your URL.
+    Good free options:
+      • GitHub Pages: create a repo, add index.html, then in Settings → Pages → set Branch = main. Your site appears at https://<username>.github.io/<repo>/
+      • Netlify: go to app.netlify.com and drag‑and‑drop your folder; Netlify gives you a URL (you can add a custom domain later).
+      • Vercel: vercel.com → "New Project" → import your GitHub repo → Deploy.
+    Your computer is only for editing; the live site is served from these platforms' global servers.
+
+    🧱 STRUCTURE SUGGESTION
+      jordanlab-site/
+        index.html
+        images/
+          team.jpg  microscope.jpg  ...
+        publications.json  (optional)
+
+    📬 Forms
+      Replace the <form action> with a service like Formspree, Getform, Netlify Forms, or your institution's form endpoint.
+
+    🔗 Custom domain (optional)
+      Buy a domain (e.g., jordanlab.org) from any registrar and point it to Netlify/Vercel or use a CNAME for GitHub Pages.
+    -->
+  </body>
+</html>

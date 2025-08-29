@@ -1,0 +1,45 @@
+[
+  {
+    "name": "Bryen Jordan, PhD",
+    "role": "Principal Investigator",
+    "img": "images/bryen.jpg",
+    "email": "mailto:your_email@einsteinmed.edu",
+    "interest": "Neuron–glia signaling, synapse-to-nucleus pathways, myelination.",
+    "bio": "Bryen performed his postdoctoral work at NYU Langone School of Medicine in the lab of HHMI member Dr. Edward Ziff, where he characterized the proteomic composition of synapses and elucidated a novel synapse-to-nucleus signaling pathway. Bryen obtained his PhD in Pharmacology from NYU School of Medicine, under the mentorship of Lakshmi Devi, studying Opioid receptor dimerization and its effects on pharmacology. Prior to this, Bryen obtained his undergraduate degree in Chemical Engineering at Rensselaer Polytechnic Institute"
+  },
+  {
+    "name": "Anne (\"Annie\") Maguire, DVM, PhD",
+    "role": "Postdoctoral Fellow",
+    "img": "images/annie.jpg",
+    "interest": "Myelin pathology as a causal mechanism in NDD; pro-myelinating therapies.",
+    "bio": "My research interests center on the hypothesis that myelin pathology is a causal mechanism underlying neurodevelopmental disorders. During my DVM and PhD training at Auburn University, I studied AAV gene therapy and myelin pathology in cats with lysosomal storage disorders. In the Jordan lab, I study oligodendrocyte and myelin deficits in multiple high-confidence autism spectrum disorder models (Nlgn1, Shank3, and SynGAP1) and the effects of pro-myelinating drugs such as clemastine. I primarily use mouse and cell culture models to assess myelin amount, oligodendrocyte morphology, and behavior, and I have a special interest in microscopy and image analysis"
+  },
+  {
+    "name": "Sarah Goebel, PhD",
+    "role": "Postdoctoral Fellow",
+    "img": "images/SarahG.jpg",
+    "interest": "Glial contributions to ASD: are myelin deficits primary drivers?",
+    "bio": "We are excited to welcome Dr. Sarah Goebel as a newly appointed research fellow supported by the IDDRC T32 training grant. Sarah brings with her a strong foundation in neuroscience, communication, and advocacy, and she is now shifting her focus to investigate autism spectrum disorders (ASD). As a T32 fellow, Sarah is investigating the hypothesis that deficits in oligodendrocyte function and disruptions in myelination are not secondary features but primary contributors to the diverse ASD. Her work seeks to uncover how altered glial function may drive the neurological and behavioral symptoms seen across the autism spectrum, with the potential to identify new therapeutic targets."
+  },
+  {
+    "name": "Dylann Cordova-Martinez, MS",
+    "role": "PhD Candidate",
+    "img": "images/dylann.jpg",
+    "interest": "SCN8A function in oligodendrocytes and myelination.",
+    "bio": "Graduate research on the role of SCN8A/Nav1.6 in oligodendrocyte physiology and its impact on myelin dynamics and circuit function."
+  },
+  {
+    "name": "Saunil (\"Sonu\") Dobariya",
+    "role": "PhD Candidate",
+    "img": "images/saunil.jpg",
+    "interest": "Neuron-OPC synapses: composition and function.",
+    "bio": "Synapses are a specialized form of communication previously thought to be unique to neuronal cells. When a neuron forms synapses with a non-neuronal cell, what does that mean how does it differ from a typical neuronal synapse? Neurons form glutamatergic and GABAergic synapses with the glial cell known as oligodendrocyte precursor cells (OPCs), but little is known of the synaptic properties of these non-canonical synapses and even less is known about their protein composition in mammalian models. My work focuses on characterizing these synapses at the proteomic and electrophysiological level in rodent primary cultures and tissue, assessing changes in neuron-OPC synaptic function and OPC maturation upon specific knockdown or deletion of known postsynaptic proteins in OPCs, such as AIDA-1"
+  },
+  {
+    "name": "Jenny Diaz-Rodriguez",
+    "role": "PhD Candidate",
+    "img": "images/jenny.jpg",
+    "interest": "OPC neurotransmitter release mechanisms.",
+    "bio": "Studies how neurotransmitter release to OPCs shapes their physiology and contributes to circuit development and plasticity."
+  }
+]
