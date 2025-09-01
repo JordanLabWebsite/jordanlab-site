@@ -52,7 +52,7 @@ header::after { content: none; }
   align-items: center;
   justify-content: space-between;
   gap: .75rem;
-  height: 72px;                 /* ↓ from 150px */
+  height: 80px;                 /* ↓ from 150px */
   padding: 0 1.25rem;           /* tighter padding */
 }
 
@@ -62,12 +62,12 @@ header::after { content: none; }
   gap: .6rem;
   font-weight: 800;
   font-size: 1.6rem;           /* smaller */
-  color: greenyellow;
+  color: turquoise;
   font-family: Arial, sans-serif;
 }
 
 .brand .logo {
-  width: 44px;                  /* ↓ from 100px */
+  width: 80px;                  /* ↓ from 100px */
   height: auto;
   border-radius: 8px;
 }
@@ -210,6 +210,7 @@ header::after { content: none; }
   font-weight: 500;
   line-height: 1.7;
   color: #d4d9e6;
+	text-align: center;
 }
 
 @media (max-width: 640px) {
@@ -661,9 +662,9 @@ header::after { content: none; }
       <section id="news" class="section container">
         <h2>News</h2>
         <ul class="list">
-          <li><strong>Aug 2025:</strong> Congrats to Annie on the sequencing course acceptance!</li>
-          <li><strong>Jun 2025:</strong> New preprint on AIDA-1 and Rac1 in neuron–glia coupling.</li>
-          <li><strong>Jan 2025:</strong> Welcome new PhD students to the lab.</li>
+          <li><strong>Aug 2025:</strong> Congratulations to Annie for presenting at the ISN-ASN 2025 Autism public forum!</li>
+          <li><strong>Jul 2025:</strong> Congratulations to Jenny for completing the Advanced Techniques in Molecular Neuroscience at Cold Spring Harbor! </li>
+          <li><strong>Jan 2025:</strong> Sonu recorded from noncanonical neuron-OPC synapses!</li>
         </ul>
       </section>
 
@@ -687,21 +688,27 @@ header::after { content: none; }
       <section id="contact" class="section container">
         <h2>Contact</h2>
         <p class="muted">Department of Neuroscience, Albert Einstein College of Medicine, Bronx, NY</p>
-        <form action="#" method="post" onsubmit="alert('This is a demo form. Connect it to a backend or form service.'); return false;">
-          <label>
-            Name
-            <input name="name" required />
-          </label>
-          <label>
-            Email
-            <input type="email" name="email" required />
-          </label>
-          <label>
-            Message
-            <textarea name="message" required></textarea>
-          </label>
-          <button class="btn primary" type="submit">Send message</button>
-        </form>
+        <form name="contact" method="POST" data-netlify="true">
+  <input type="hidden" name="form-name" value="contact">
+  
+  <label>
+    Name
+    <input type="text" name="name" required>
+  </label>
+  
+  <label>
+    Email
+    <input type="email" name="email" required>
+  </label>
+  
+  <label>
+    Message
+    <textarea name="message" required></textarea>
+  </label>
+  
+  <button class="btn primary" type="submit">Send message</button>
+</form>
+
       </section>
     </main>
 
