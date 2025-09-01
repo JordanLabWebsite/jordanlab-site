@@ -1,9 +1,58 @@
 [
-  { "src": "images/gallery/image1.jpg", "alt": "Microscopy figure 1", "caption": "high magnification image of dendritic spines on cultured hippocampal neurons" },
-  { "src": "images/gallery/image2.jpg", "alt": "Microscopy figure 2", "caption": "Oligodendrocyte in culture- blue = MBP, red = O4"},
-  { "src": "images/gallery/image3.jpg", "alt": "Microscopy figure 1", "caption": "AIDA-1 interactome" },
-  { "src": "images/gallery/image4.jpg", "alt": "Microscopy figure 2", "caption": "2007 Cover of Nature Neuroscience showing illustrating the nucleocytoplasmic shuttling of AIDA1" },
-  { "src": "images/gallery/image5.jpg", "alt": "Microscopy figure 1", "caption": "2004 Cover of Molecular and Cellular Proteomics illustrating our proteomics analysis of postsynaptic densities" },
-  { "src": "images/gallery/image6.jpg", "alt": "Microscopy figure 2", "caption": "AlexaFluor filled patched pyramidal CA1 neuron" },
-  { "src": "images/gallery/image7.jpg", "alt": "Lab retreat photo" }
+  { "src": "images/gallery/image1.jpg", "alt": "Microscopy figure 1", "caption": "high magnification image of dendritic spines on cultured hippocampal neurons", "type": "image" },
+
+  { "src": "images/gallery/image2.jpg", "alt": "Microscopy figure 2", "caption": "Oligodendrocyte in culture- blue = MBP, red = O4", "type": "image" },
+
+  { "src": "images/gallery/image3.jpg", "alt": "Microscopy figure 1", "caption": "AIDA-1 interactome", "type": "image" },
+
+  {
+    "type": "video",
+    "sources": [
+      { "src": "videos/cell-mig-neurospere.mp4", "type": "video/mp4" }
+    ],
+    "poster": "images/gallery/cell-mig-neurosphere_poster.jpg",
+    "alt": "oligodendrocytes emerging from a cultured neurosphere",
+    "caption": "oligodendrocytes emerging from a cultured neurosphere"
+  },
+
+  {
+    "type": "video",
+    "sources": [
+      { "src": "videos/oligofret.mp4", "type": "video/mp4" }
+    ],
+    "poster": "images/gallery/oligofret_poster.jpg",
+    "alt": "oligodendrocytes-Rac1-FRET",
+    "caption": "Rac1 biosensors in mature oligodendrocytes"
+  },
+
+  {
+    "type": "video",
+    "sources": [
+      { "src": "videos/organoidssmaller.mp4", "type": "video/mp4" }
+    ],
+    "poster": "images/gallery/organoidssmaller_poster.jpg",
+    "alt": "bANKS1B neurodevelopmental syndrome organoid",
+    "caption": "iPSC from ANKS1B affected individuals converted to organoids"
+  },
+
+  {
+    "type": "video",
+    "sources": [
+      { "src": "videos/oligosmovingslice.mp4", "type": "video/mp4" }
+    ],
+    "poster": "images/gallery/oligosmovingslice_poster.jpg",
+    "alt": "oligodendrocytes slice culture",
+    "caption": "NG2-488 labeled oligodendrocyte in organotypic cultures"
+  },
+
+  {
+    "type": "video",
+    "sources": [
+      { "src": "videos/oligmodel.webm", "type": "video/webm" },
+      { "src": "videos/oligmodel.mp4",  "type": "video/mp4" }
+    ],
+    "poster": "images/gallery/oligmodel_poster.jpg",
+    "alt": "myelination in circuit function",
+    "caption": "myelination can synchronize neuronal activity"
+  }
 ]

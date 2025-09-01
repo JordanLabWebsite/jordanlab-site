@@ -32,79 +32,110 @@
       .container { width: 100%; max-width: var(--maxw); margin: 0 auto; padding: 0 1.25rem; }
 
       /* Nav */
-/* HEADER BAR (logo + menus) */
+/* Header: lighter + translucent so it blends with the hero */
 header {
   position: sticky;
   top: 0;
   z-index: 50;
-
-  /* Background image always fully visible */
-  background: url("images/header-bg.jpg") center center no-repeat;
-  background-size: contain;   /* whole image shown, no cropping */
-
-  /* Optional fallback color if image doesn’t cover the bar fully */
-  background-color: #1a2a6c;  
-
-  border-bottom: 1px solid rgba(148,163,184,.2);
-  box-shadow: 0 4px 12px rgba(0,0,0,0.25);
+  background: rgba(11, 12, 16, 0.45);          /* translucent */
+  backdrop-filter: saturate(140%) blur(6px);    /* soft glass effect */
+  -webkit-backdrop-filter: saturate(140%) blur(6px);
+  border-bottom: none;
+  box-shadow: none;
 }
-	/* dark overlay to keep text readable */
-header::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: rgba(0,0,0,0.55); 
-  z-index: -1;
-}	
-   .nav {
+
+/* remove the solid dark overlay that forced a seam */
+header::after { content: none; }
+
+.nav {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 1rem;
-  height: 150px;          /* was 64px → taller bar */
-  padding: 0 2rem;
+  gap: .75rem;
+  height: 72px;                 /* ↓ from 150px */
+  padding: 0 1.25rem;           /* tighter padding */
 }
 
 .brand {
   display: inline-flex;
   align-items: center;
-  gap: .8rem;
+  gap: .6rem;
   font-weight: 800;
-  font-size: 1.8rem;       /* bigger logo text */
+  font-size: 1.6rem;           /* smaller */
   color: yellowgreen;
   font-family: Arial, sans-serif;
 }
 
 .brand .logo {
-  width: 100px;             /* bigger logo image */
+  width: 44px;                  /* ↓ from 100px */
   height: auto;
   border-radius: 8px;
 }
-      .menu { display: flex; gap: 1rem; align-items: center; }
+
 .menu a {
-  font-size: 1.4rem;       /* bigger menu font */
-  padding: 0.5rem 1rem;
+  font-size: 1rem;              /* ↓ from 1.4rem */
+  padding: 0.4rem 0.6rem;
   color: var(--text);
   opacity: .9;
 }
+
 .menu a:hover { opacity: 1; }
       .menu-toggle { display: none; font-size: 1.3rem; background: none; border: 1px solid rgba(148,163,184,.3); color: var(--text); padding: .4rem .6rem; border-radius: .6rem; }
 
-      /* Hero */
-      .hero { padding: 5rem 0 3rem; text-align: center;
-			 background: url("images/Background.jpg") no-repeat center center;
-  			background-size: cover;    /* make it fill the whole section */
-		    background-attachment: fixed; /* this makes the background image fixed*/
- 			 position: relative;        /* needed for overlay trick below */
-		 	 z-index: 0;}
-		.hero::before {
- 			 content: "";
- 			 position: absolute;
- 			 top: 0; left: 0; right: 0; bottom: 0;
-  				background: rgba(0, 0, 0, 0.6);  /* black overlay at 40% transparency */
-  				z-index: -1;  /* sits behind the text */}
-      .hero h1 { font-size: clamp(2rem, 6vw, 3.2rem); line-height: 1.15; margin: 0 0 .6rem; }
-      .hero p { color: var(--muted); margin: 0 auto 1.2rem; max-width: 70ch; }
+     /* Hero: pull it slightly under the sticky header and add a top fade */
+.hero {
+  /* keep your background image settings */
+  padding: 8rem 0 6rem;
+  text-align: center;
+  background: url("images/Background.jpg") no-repeat center center;
+  background-size: cover;
+  background-attachment: fixed;
+  position: relative;
+  z-index: 0;
+
+  /* let the hero slide under the header so the fade looks continuous */
+  margin-top: -72px;                          /* equal to .nav height */
+  padding-top: calc(5rem + 72px);             /* keep text position */
+}
+
+/* One pseudo-element, two layered gradients:
+   - TOP gradient (on top): fades from page bg color → transparent (so the image fades out under the navbar)
+   - BOTTOM gradient: gentle darkening for text legibility */
+.hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    /* top fade into page background */
+    linear-gradient(to bottom, var(--bg) 0%, rgba(11,12,22,0) 32%),
+    /* bottom readability shade */
+    linear-gradient(to bottom, rgba(0,0,0,0.0) 70%, var(--bg) 100%);
+  z-index: 0;
+}
+
+		.hero { position: relative; }
+.hero > * { position: relative; z-index: 1; }
+
+.hero h1{
+  font-size: clamp(2.8rem, 7vw, 4rem);  /* responsive: ~38px → ~58px */
+  line-height: 1.15;
+  margin: 0 0 .6rem;
+  color: #fff;
+  font-weight: 800;
+  text-shadow: 0 3px 12px rgba(0,0,0,.55);
+}
+
+.hero p{
+  font-size: clamp(1.05rem, 2.2vw, 1.25rem); /* ~17px → ~20px */
+  line-height: 1.6;
+  margin: 0 auto 1.2rem;
+  max-width: 70ch;
+  color: #e6ecff;
+  text-shadow: 0 2px 8px rgba(0,0,0,.5);
+}
+
+	
  .cta-grid {
   display: flex;
   justify-content: center;   /* center row in hero */
@@ -151,44 +182,39 @@ header::after {
       .card { background: var(--panel); border: 1px solid rgba(148,163,184,.15); border-radius: 1rem; padding: 1.2rem; }
       .card h3 { margin: 0 0 .4rem; font-size: 1.1rem; }
       .card p { margin: 0; color: var(--muted); }
-		
-/* Thin, flexible Overview band (auto-height) */
+/* Seamless Overview section */
 .overview {
   position: relative;
-  background: linear-gradient(180deg, #1c1f2a, #2c3145); /* deep gradient */
-  color: #f0f4ff;         /* light text */
+  background: none; /* remove gradient */
+  border: none;         /* no borders */
+  color: #f0f4ff;
   padding: 2.5rem 0;
-  border-top: 1px solid rgba(255,255,255,0.1);
-  border-bottom: 1px solid rgba(255,255,255,0.1);
+  border: none;                  /* remove top & bottom borders */
 }
 
 .overview::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: url("images/overview-bg.jpg") center/cover no-repeat;
-  opacity: 0.2;                      /* subtle texture; safe to remove */
-  pointer-events: none;
+  content: none;                 /* remove pseudo-element entirely */
 }
 
 .overview h2 {
   margin: 0 0 .5rem;
   font-size: clamp(1.5rem, 2.2vw, 1.9rem);
-	font-weight: 800;     /* bold */
-  color: #ffffff;         /* brighter heading */
-	 text-align: center;   /* centers "Our Focus" */
+  font-weight: 800;
+  color: #ffffff;
+  text-align: center;
 }
 
-/* Desktop/tablet: let it be wide */
-.overview-text { max-width: none;   font-size: 1.2rem;    /* larger body text (default ~1rem) */
-  font-weight: 500;     /* medium boldness; use 600–700 for full bold */
-  line-height: 1.7;     /* controls spacing between lines */
-  color: #d4d9e6; }
+.overview-text {
+  max-width: none;
+  font-size: 1.2rem;
+  font-weight: 500;
+  line-height: 1.7;
+  color: #d4d9e6;
+}
 
-/* Phones: re-cap the line length so it’s easy to read */
 @media (max-width: 640px) {
   .overview-text {
-    max-width: 70ch;   /* readable line length on small screens */
+    max-width: 70ch;
   }
 }
 
@@ -345,12 +371,6 @@ header::after {
 .p-role { color: var(--muted, #9aa7b4); font-size: 0.95rem; text-align: center; }
 .p-interest { color: var(--muted, #9aa7b4); font-size: 0.95rem; text-align: center; margin-top: .15rem; }
 
-
-/* Text below image */
-.p-name { font-weight: 700; margin-top: .55rem; text-align: center; }
-.p-role { color: var(--muted, #9aa7b4); font-size: 0.95rem; text-align: center; }
-.p-interest { color: var(--muted, #9aa7b4); font-size: 0.95rem; text-align: center; margin-top: .15rem; }
-
       /* Publications */
       .pubs { display: grid; gap: .8rem; }
       .pub { background: var(--panel); border: 1px solid rgba(148,163,184,.15); border-radius: .8rem; padding: .9rem; }
@@ -419,75 +439,79 @@ header::after {
 }
 
 
-/* Gallery grid */
+/* Base: single column on very small screens */
 .gallery-grid {
   display: grid;
-  gap: 1rem;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1.25rem;
+  grid-template-columns: 1fr;
 }
 
-		/* Wrap each image so we can position an overlay */
+/* Two columns on tablets */
+@media (min-width: 640px) {
+  .gallery-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+/* Three columns on desktops (your request) */
+@media (min-width: 1024px) {
+  .gallery-grid { grid-template-columns: repeat(3, 1fr); }
+}
+
+/* Uniform tile frame */
 .gallery-item {
   position: relative;
-  border-radius: 12px;
+  border-radius: 14px;
   overflow: hidden;
   background: #0f141b;
+  aspect-ratio: 16 / 9;        /* <- choose 16/9 or 1/1 if you prefer squares */
 }
-		/* The image */
-.gallery-item img {
+
+/* Apply to <img> AND <video> */
+.gallery-media {
+  display: block;
   width: 100%;
   height: 100%;
-  display: block;
-  object-fit: cover;               /* or 'contain' if you prefer no cropping */
+  object-fit: cover;            /* fill the frame consistently */
   transition: filter .25s ease, transform .25s ease;
 }
-		/* The overlay caption (hidden by default) */
+
+/* Optional: fine-tune video defaults so they behave like images */
+.gallery-video {
+  background: #0f141b;
+}
+
+/* Caption overlay (initially hidden) */
 .gallery-caption {
   position: absolute;
-  inset: 0;
-  display: flex;
-  align-items: flex-end;           /* caption near bottom */
-  padding: .75rem .9rem;
+  left: 0; right: 0; bottom: 0;
+  padding: .75rem 1rem;
   color: #fff;
-  background: linear-gradient(to top, rgba(0,0,0,.65), rgba(0,0,0,.0) 55%);
-  opacity: 0;
-  transition: opacity .25s ease;
   font-size: .95rem;
+  line-height: 1.35;
+  background: linear-gradient(to top, rgba(0,0,0,.65), rgba(0,0,0,0));
+  transform: translateY(100%);
+  opacity: 0;
+  transition: transform .25s ease, opacity .25s ease;
+  pointer-events: none;          /* purely informational */
 }
 		
-/* Hover: dim image and reveal caption */
-.gallery-item:hover img {
-  filter: brightness(0.6);
-  transform: scale(1.02);
-}
-.gallery-item:hover .gallery-caption {
-  opacity: 1;
-}
-		/* Keyboard accessibility: show on focus too */
-.gallery-item:focus-within .gallery-caption,
-.gallery-item:focus-visible .gallery-caption {
+/* Reveal on hover and keyboard focus */
+.gallery-item:hover .gallery-caption,
+.gallery-item:focus-within .gallery-caption {
+  transform: translateY(0);
   opacity: 1;
 }
 
-/* Optional: always show caption on small touch screens */
-@media (max-width: 640px) {
-  .gallery-caption { opacity: 1; }
-  .gallery-item img { filter: brightness(0.8); }
-}
-.gallery-grid img {
-  width: 100%;
-  height: auto;
-  border-radius: 12px;
-  object-fit: cover;
-  transition: transform .25s ease;
+/* On touch devices (no hover), keep captions visible */
+@media (hover: none) and (pointer: coarse) {
+  .gallery-caption {
+    transform: none;
+    opacity: 1;
+  }
 }
 
-.gallery-grid img:hover {
-  transform: scale(1.05);
-}
 		/* Scrollable publications box */
 .pub-scroll {
-  max-height: 28rem;            /* tweak to show ~8 items on desktop */
+  max-height: 37rem;            /* tweak to show ~8 items on desktop */
   overflow-y: auto;             /* vertical scrollbar when needed */
   padding-right: .5rem;         /* space so text isn't under the scrollbar */
   border: 1px solid #1f2937;    /* subtle border to “box” it */
@@ -714,30 +738,7 @@ header::after {
 
     
     </script>
-	  <script>
-  // Load research content from JSON and inject into the three cards
-  fetch('research/research.json')
-    .then(res => {
-      if (!res.ok) throw new Error('Network response was not ok');
-      return res.json();
-    })
-    .then(data => {
-      // Myelination
-      document.getElementById('myelination-title').textContent = data.myelination.title;
-      document.getElementById('myelination-body').textContent  = data.myelination.body;
-
-      // Neuron–oligodendrocyte signaling
-      document.getElementById('neuron-oligo-title').textContent = data.neuron_oligo.title;
-      document.getElementById('neuron-oligo-body').textContent  = data.neuron_oligo.body;
-
-      // Molecular control of actin and morphology
-      document.getElementById('actin-morphology-title').textContent = data.actin_morphology.title;
-      document.getElementById('actin-morphology-body').textContent  = data.actin_morphology.body;
-    })
-    .catch(err => {
-      console.error('Failed to load research.json:', err);
-    });
-</script>
+	 
 	  <script>
   document.addEventListener('DOMContentLoaded', () => {
     console.log('Starting fetch…');
@@ -909,28 +910,112 @@ document.addEventListener('DOMContentLoaded', () => {
   
 <script>
 document.addEventListener('DOMContentLoaded', () => {
+  const grid = document.getElementById('gallery-grid');
+  if (!grid) return;
+
   fetch('gallery.json?v=' + Date.now())
     .then(r => r.json())
-    .then(images => {
-      const grid = document.getElementById('gallery-grid');
+    .then(items => {
       grid.innerHTML = '';
-      images.forEach(img => {
-        const item = document.createElement('div');
-        item.className = 'gallery-item';
-        // If you want keyboard focus/enter to also show overlay, wrap in a link:
-        item.innerHTML = `
-          <img src="${img.src}" alt="${(img.alt || 'Gallery image').replace(/"/g,'&quot;')}" loading="lazy">
-          ${img.caption ? `<div class="gallery-caption">${img.caption}</div>` : ''}
-        `;
-        grid.appendChild(item);
+
+      items.forEach(item => {
+        const fig = document.createElement('figure');
+        fig.className = 'gallery-item';
+
+        let media;
+
+        if (item.type === 'video') {
+          media = document.createElement('video');
+          media.className = 'gallery-media gallery-video';
+          media.muted = true;
+          media.loop = true;
+          media.playsInline = true;         // iOS autoplay requires this
+          media.setAttribute('preload', 'metadata'); // poster helps first paint
+          media.setAttribute('data-autoplay', '');
+
+          if (item.poster) media.poster = item.poster;
+
+          // Support either a single src or an array of sources
+          if (Array.isArray(item.sources) && item.sources.length) {
+            item.sources.forEach(s => {
+              const srcEl = document.createElement('source');
+              srcEl.src = s.src;
+              if (s.type) srcEl.type = s.type;
+              media.appendChild(srcEl);
+            });
+          } else if (item.src) {
+            // fallback: single src
+            const srcEl = document.createElement('source');
+            srcEl.src = item.src;
+            // try to infer type
+            if (item.src.endsWith('.mp4')) srcEl.type = 'video/mp4';
+            if (item.src.endsWith('.webm')) srcEl.type = 'video/webm';
+            media.appendChild(srcEl);
+          }
+
+        } else { // image
+          media = document.createElement('img');
+          media.className = 'gallery-media';
+          media.src = item.src;
+          media.alt = item.alt || '';
+          media.loading = 'lazy';
+        }
+
+        const cap = document.createElement('figcaption');
+        cap.className = 'gallery-caption';
+        cap.textContent = item.caption || '';
+
+        fig.appendChild(media);
+        fig.appendChild(cap);
+        grid.appendChild(fig);
       });
+
+      // 🔁 INIT AUTOPLAY OBSERVER *after* videos exist
+      const vids = Array.from(document.querySelectorAll('.gallery-video[data-autoplay]'));
+      if (vids.length && 'IntersectionObserver' in window) {
+        const prefersReduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        const io = new IntersectionObserver(entries => {
+          entries.forEach(entry => {
+            const v = entry.target;
+            if (prefersReduced) { v.pause(); return; }
+            if (entry.isIntersecting && entry.intersectionRatio > 0.5) {
+              v.play().catch(()=>{});
+            } else {
+              v.pause();
+              v.currentTime = 0;
+            }
+          });
+        }, { threshold: [0.5] });
+
+        vids.forEach(v => io.observe(v));
+      }
     })
     .catch(err => {
-      console.error('Gallery load failed:', err);
-      document.getElementById('gallery-grid').innerHTML = '<p class="muted">No images found.</p>';
+      console.error('Failed to load gallery.json', err);
+      grid.innerHTML = '<p class="muted">Could not load gallery items.</p>';
     });
 });
 </script>
+
+
+	  <script>
+(function () {
+  const io = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      const v = entry.target;
+      if (entry.isIntersecting && entry.intersectionRatio > 0.5) {
+        v.play().catch(()=>{});
+      } else {
+        v.pause();
+        v.currentTime = 0;
+      }
+    });
+  }, { threshold: [0.5] });
+
+  document.querySelectorAll('.gallery-video[data-autoplay]').forEach(v => io.observe(v));
+})();
+</script>
+
 	  
 	  <script>
 document.addEventListener('DOMContentLoaded', () => {

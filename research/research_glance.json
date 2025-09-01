@@ -2,37 +2,37 @@
 {
     "title": "AIDA1 in control of the cytoskeleton",
     "pmid": "37255534",
-    "img": "images/AIDAactin.jpg",
+    "img": "images/researchglance/AIDAactin.jpg",
     "summary": "AIDA-1 regulates actin-based cytoskeletal dynamics"
   },
   {
     "title": "Rac in ASD",
     "pmid": "37255534",
-    "img": "images/Rac1asd.jpeg",
+    "img": "images/researchglance/Rac1asd.jpeg",
     "summary": "Diverse ASD-linked genes regulate Rac1 activity"
   },
   {
     "title": "Myelination in neurodevelopmental disorders",
     "pmid": "38129387",
-    "img": "images/myelininASD.jpeg",
+    "img": "images/researchglance/myelininASD.jpeg",
     "summary": "Disrupted myelination underlies ANKS1B Neurodevelopmental Syndrome"
   },
   {
     "title": "AIDA-1 / ANKS1B in an ASD",
     "pmid": "31388001",
-    "img": "images/AIDA1asd.jpeg",
+    "img": "images/researchglance/AIDA1asd.jpeg",
     "summary": "Monogenic and heterozygous deletions in ANKS1B lead to neurodevelopmental phenotypes."
   },
   {
     "title": "Myelination as a point of convergence in ASD",
     "pmid": "",
-    "img": "images/AnnieIMAGE.png",
+    "img": "images/researchglance/AnnieIMAGE.png",
     "summary": "NLGN, SynGAP1, Shank3 regulate myelination"
   },
  {
     "title": "Neuron-OPC synapses",
     "pmid": "",
-    "img": "images/Sonu-Neuron-OPC.jpeg",
+    "img": "images/researchglance/Sonu-Neuron-OPC.jpeg",
     "summary": "Noncanonical synapses formed between Neurons and OPCs"
   }
 ]
