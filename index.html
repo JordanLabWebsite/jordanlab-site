@@ -945,14 +945,16 @@ document.addEventListener('DOMContentLoaded', () => {
         const card = document.createElement('article');
         card.className = 'person';
         card.innerHTML = `
-          <div class="person-media">
-            <img src="${esc(img)}" alt="${esc(p.name)} portrait" loading="lazy">
-            ${p.bio ? `<div class="person-overlay">${esc(p.bio)}</div>` : ''}
-          </div>
-          <div class="p-name">${esc(p.name || '')}</div>
-          <div class="p-role">${esc(p.role || '')}</div>
-          ${p.interest ? `<div class="p-interest">${esc(p.interest)}</div>` : ''}
-        `;
+  <div class="person-media">
+    <img src="${esc(img)}" alt="${esc(p.name)} portrait" loading="lazy">
+    ${p.bio ? `<div class="person-overlay">${esc(p.bio)}</div>` : ''}
+  </div>
+  <div class="p-name">${esc(p.name || '')}</div>
+  <div class="p-role">${esc(p.role || '')}</div>
+  ${p.interest ? `<div class="p-interest">${esc(p.interest)}</div>` : ''}
+  ${p.bio ? `<button type="button" class="bio-toggle" aria-expanded="false">Bio</button>` : ''}
+`;
+
         grid.appendChild(card);
       });
       if (!list.length) grid.innerHTML = '<p class="muted">No lab members listed yet.</p>';
@@ -1035,6 +1037,63 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 })();
 </script>
+	  
+	  <script>
+document.addEventListener('DOMContentLoaded', () => {
+  const grid = document.getElementById('people-grid');
+  if (!grid) return;
+
+  // Delegate clicks to one handler — robust even if cards render later
+  grid.addEventListener('click', (e) => {
+    const btn = e.target.closest('.bio-toggle');
+    if (!btn) return;
+
+    const card = btn.closest('.person');
+    const overlay = card?.querySelector('.person-overlay');
+    if (!overlay) return;
+
+    // Ensure scrollable wrapper exists (long bios on phones)
+    if (!overlay.querySelector('.p-bio')) {
+      const wrap = document.createElement('div');
+      wrap.className = 'p-bio';
+      while (overlay.firstChild) wrap.appendChild(overlay.firstChild);
+      overlay.appendChild(wrap);
+    }
+
+    const isOpen = card.classList.toggle('is-open');
+    btn.setAttribute('aria-expanded', String(isOpen));
+    overlay.setAttribute('aria-hidden', String(!isOpen));
+  });
+
+  // Optional: close when tapping outside the overlay
+  grid.addEventListener('click', (e) => {
+    const openCard = grid.querySelector('.person.is-open');
+    if (!openCard) return;
+    const clickedInside = e.target.closest('.person') === openCard;
+    const clickedBtn = e.target.closest('.bio-toggle');
+    if (!clickedInside && !clickedBtn) {
+      openCard.classList.remove('is-open');
+      const btn = openCard.querySelector('.bio-toggle');
+      const overlay = openCard.querySelector('.person-overlay');
+      btn?.setAttribute('aria-expanded', 'false');
+      overlay?.setAttribute('aria-hidden', 'true');
+    }
+  });
+
+  // Optional: allow Escape to close
+  document.addEventListener('keydown', (e) => {
+    if (e.key !== 'Escape') return;
+    const openCard = grid.querySelector('.person.is-open');
+    if (!openCard) return;
+    openCard.classList.remove('is-open');
+    const btn = openCard.querySelector('.bio-toggle');
+    const overlay = openCard.querySelector('.person-overlay');
+    btn?.setAttribute('aria-expanded', 'false');
+    overlay?.setAttribute('aria-hidden', 'true');
+  });
+});
+</script>
+
 
 
 <script>
