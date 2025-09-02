@@ -436,8 +436,8 @@ header::after { content: none; }
     transform: translateY(0);
   }
 
-  /* reduce desktop hover effect on touch (optional) */
-  .person:hover .person-overlay { opacity: 0; }
+.person:not(.is-open):hover .person-overlay { opacity: 0; }
+
 }
 
 
@@ -1338,7 +1338,7 @@ document.addEventListener('DOMContentLoaded', () => {
       if (!list.length) grid.innerHTML = '<p class="muted">No alumni listed yet.</p>';
     })
     .catch(err => {
-      console.error('Failed to load alumni.json:', err);
+      console.error('Failed to load alumni.json:', err);git stat
       grid.innerHTML = '<p class="muted">Could not load alumni.</p>';
     });
 });
