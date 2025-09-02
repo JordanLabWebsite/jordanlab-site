@@ -388,6 +388,10 @@ header::after { content: none; }
 .person:hover .person-overlay,
 .person:focus-within .person-overlay { opacity: 1; }
 .person:hover img { filter: brightness(0.75); transform: scale(1.02); }
+		/* Hide by default (desktop) */
+.bio-toggle { 
+  display: none; 
+}
 		
 		/* Mobile-only Bio button & overlay behavior */
 @media (hover: none) and (pointer: coarse) {
