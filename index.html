@@ -950,7 +950,7 @@ document.addEventListener('DOMContentLoaded', () => {
         card.className = 'person';
         card.innerHTML = `
   <div class="person-media">
-    <img src="${esc(img)}" alt="${esc(p.name)} portrait" loading="lazy">
+    <img src="${esc(p.img)}" alt="${esc(p.alt || (p.name + ' portrait'))}" loading="lazy">
     ${p.bio ? `<div class="person-overlay">${esc(p.bio)}</div>` : ''}
   </div>
   <div class="p-name">${esc(p.name || '')}</div>
