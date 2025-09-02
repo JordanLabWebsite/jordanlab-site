@@ -631,43 +631,48 @@ header::after { content: none; }
 /* Our Home (Location) section with full-bleed background */
 .location {
   position: relative;
-  /* TODO: update the image path to your desired background */
-  background: url("images/rfk-building.jpg") center center / cover no-repeat fixed;
-  padding: 4rem 0; /* inherit your .section spacing */
+  background: url("images/rfk-building.jpg") center center / cover no-repeat;
+  padding: 4rem 0;
 }
 
-/* Soft dark overlay to keep text legible on bright images */
+/* Soft overlay to keep text readable (transparent so background shows) */
 .location::before {
   content: "";
   position: absolute;
   inset: 0;
-  background: linear-gradient(to bottom, rgba(0,0,0,.35), rgba(0,0,0,.35));
+  background: linear-gradient(to bottom, rgba(0,0,0,.70), rgba(0,0,0,.35));
   pointer-events: none;
 }
 
 .location .container { position: relative; z-index: 1; }
-.location h2 { text-align: center; }
+.location h2 {   text-align: center;
+  font-size: clamp(2rem, 4vw, 2.8rem); /* scales with screen size */
+  font-weight: 800;                    /* bolder */
+  color: #fff;                         /* white text for contrast */
+  text-shadow: 0 3px 8px rgba(0,0,0,.6); /* subtle shadow to pop against background */
+  margin-bottom: 1rem;}
 .location p {
   max-width: 70ch;
   margin: 0.5rem auto 1.5rem;
   text-align: center;
 }
 
-/* Two-up grid for Our Home images */
-.home-grid {
+/* Use your existing gallery cards but make the grid 2-up here */
+.location .gallery-grid {
   display: grid;
   gap: 1.25rem;
   grid-template-columns: repeat(2, minmax(0, 1fr));
 }
 
-/* Phones: stack images */
+/* Phones: stack images; avoid fixed backgrounds on mobile */
 @media (max-width: 640px) {
   .location { 
-    background-attachment: scroll;        /* mobile fix */
-    background-position: center 30%;      /* show a nicer slice on small screens */
+    background-attachment: scroll;
+    background-position: center 30%;
   }
-  .home-grid { grid-template-columns: 1fr; }
+  .location .gallery-grid { grid-template-columns: 1fr; }
 }
+
 
     </style>
   </head>
@@ -794,25 +799,27 @@ header::after { content: none; }
   </div>
 </section>
 
-		<section id="location" class="section container">
-  <h2>Our Home: The Historic Rose F. Kennedy Building</h2>
-  <p>
-   In the early 1960s, President John F. Kennedy called for a national effort to improve understanding and treatment of intellectual and developmental disabilities. His vision led to the creation of federally funded research and clinical centers across the country. Albert Einstein College of Medicine was chosen as one of these sites, and in 1966, Rose and Robert Kennedy joined the groundbreaking for the new center that would bear Rose Kennedy’s name. When the building opened its doors in 1970, it became a home for pioneering basic science and clinical programs focused on bridging research on the developing brain with care for children and families. 
-From its earliest days, the Kennedy Building embodied a spirit of discovery linked directly to service, ensuring that research was grounded in the realities of the affected individuals and their families. Today, we carry forward that legacy through cutting-edge neuroscience, genetics, and clinical innovation, committed to the same mission that inspired President Kennedy: to bring hope and progress to individuals with developmental disabilities and their communities.
+		<section id="location" class="location section">
+  <div class="container">
+    <h2>Our Home: The Historic Rose F. Kennedy Building</h2>
+    <p>
+      In the early 1960s, President John F. Kennedy called for a national effort to improve understanding and treatment of intellectual and developmental disabilities. His vision led to the creation of federally funded research and clinical centers across the country. Albert Einstein College of Medicine was chosen as one of these sites, and in 1966, Rose and Robert Kennedy joined the groundbreaking for the new center that would bear Rose Kennedy’s name. When the building opened its doors in 1970, it became a home for pioneering basic science and clinical programs focused on bridging research on the developing brain with care for children and families. 
+      From its earliest days, the Kennedy Building embodied a spirit of discovery linked directly to service, ensuring that research was grounded in the realities of the affected individuals and their families. Today, we carry forward that legacy through cutting-edge neuroscience, genetics, and clinical innovation, committed to the same mission that inspired President Kennedy: to bring hope and progress to individuals with developmental disabilities and their communities.
+    </p>
 
-  </p>
-
-  <div class="gallery-grid">
-    <figure class="gallery-item">
-      <img src="images/jfk-founding.jpg" alt="Historical photo of Kennedy family at Einstein" class="gallery-media">
-      <figcaption class="gallery-caption">In 1961, JFK issues the first push to advance understanding and treatment of intellectual disabilities </figcaption>
-    </figure>
-	   <figure class="gallery-item">
-      <img src="images/kennedy-founders.jpg" alt="Historical photo of Kennedy family at Einstein" class="gallery-media">
-      <figcaption class="gallery-caption">Rose and Robert Kennedy attend the groundbreaking of the Kennedy Center at the Albert Einstein College of Medicine</figcaption>
-    </figure>
+    <div class="gallery-grid">
+      <figure class="gallery-item">
+        <img src="images/jfk-founding.jpg" alt="Historical photo of Kennedy family at Einstein" class="gallery-media">
+        <figcaption class="gallery-caption">In 1961, JFK issues the first push to advance understanding and treatment of intellectual disabilities</figcaption>
+      </figure>
+      <figure class="gallery-item">
+        <img src="images/kennedy-founders.jpg" alt="Historical photo of Kennedy family at Einstein" class="gallery-media">
+        <figcaption class="gallery-caption">Rose and Robert Kennedy attend the groundbreaking of the Kennedy Center at the Albert Einstein College of Medicine</figcaption>
+      </figure>
+    </div>
   </div>
 </section>
+
       <section id="join" class="section container">
         <h2>Join Us</h2>
         <p>We welcome curious, rigorous scientists at all stages. To apply, email your CV and a brief statement of interests.</p>
