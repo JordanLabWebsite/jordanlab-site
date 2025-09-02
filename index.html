@@ -956,6 +956,7 @@ document.addEventListener('DOMContentLoaded', () => {
         grid.appendChild(card);
       });
       if (!list.length) grid.innerHTML = '<p class="muted">No lab members listed yet.</p>';
+	  document.dispatchEvent(new CustomEvent('people:rendered'));
     })
     .catch(err => {
       console.error('people.json error:', err);
@@ -965,59 +966,75 @@ document.addEventListener('DOMContentLoaded', () => {
 </script>
 	  <script>
 (function () {
-  // only on touch devices
   const isTouch = window.matchMedia && window.matchMedia('(hover: none) and (pointer: coarse)').matches;
   if (!isTouch) return;
 
-  // Ensure .p-bio wrapper exists so long text can scroll
-  document.querySelectorAll('.person .person-overlay').forEach(ov => {
-    if (!ov.querySelector('.p-bio')) {
-      const wrap = document.createElement('div');
-      wrap.className = 'p-bio';
-      // move existing text/HTML into wrapper
-      while (ov.firstChild) wrap.appendChild(ov.firstChild);
-      ov.appendChild(wrap);
-    }
-    ov.setAttribute('role', 'dialog');
-    ov.setAttribute('aria-hidden', 'true');
-  });
+  function setupMobileBios() {
+    // Ensure scroll wrapper exists for long bios
+    document.querySelectorAll('.person .person-overlay').forEach(ov => {
+      if (!ov.querySelector('.p-bio')) {
+        const wrap = document.createElement('div');
+        wrap.className = 'p-bio';
+        while (ov.firstChild) wrap.appendChild(ov.firstChild);
+        ov.appendChild(wrap);
+      }
+      ov.setAttribute('role', 'dialog');
+      ov.setAttribute('aria-hidden', 'true');
+    });
 
-  // Add a Bio button to each card and hook up toggle
-  document.querySelectorAll('.person').forEach(card => {
-    const overlay = card.querySelector('.person-overlay');
-    if (!overlay) return;
+    // Add Bio buttons and wire up toggles
+    document.querySelectorAll('.person').forEach(card => {
+      const overlay = card.querySelector('.person-overlay');
+      const media   = card.querySelector('.person-media');
+      if (!overlay) return;
 
-    // inject the button
-    const btn = document.createElement('button');
-    btn.type = 'button';
-    btn.className = 'bio-toggle';
-    btn.textContent = 'Bio';
-    btn.setAttribute('aria-expanded', 'false');
-    card.appendChild(btn);
-
-    // optional close by tapping outside overlay content
-    overlay.addEventListener('click', (e) => {
-      if (e.target === overlay) {
-        card.classList.remove('is-open');
+      // Avoid duplicates if re-run
+      if (!card.querySelector('.bio-toggle')) {
+        const btn = document.createElement('button');
+        btn.type = 'button';
+        btn.className = 'bio-toggle';
+        btn.textContent = 'Bio';
         btn.setAttribute('aria-expanded', 'false');
-        overlay.setAttribute('aria-hidden', 'true');
+        card.appendChild(btn);
+
+        const closeOverlay = () => {
+          card.classList.remove('is-open');
+          btn.setAttribute('aria-expanded', 'false');
+          overlay.setAttribute('aria-hidden', 'true');
+        };
+
+        // Toggle via button
+        btn.addEventListener('click', () => {
+          const open = !card.classList.contains('is-open');
+          document.querySelectorAll('.person.is-open').forEach(p => p.classList.remove('is-open'));
+          card.classList.toggle('is-open', open);
+          btn.setAttribute('aria-expanded', String(open));
+          overlay.setAttribute('aria-hidden', String(!open));
+        });
+
+        // Optional: also allow tapping the picture to open/close
+        media?.addEventListener('click', () => btn.click());
+
+        // Tap outside to close
+        overlay.addEventListener('click', (e) => {
+          if (e.target === overlay) closeOverlay();
+        });
       }
     });
+  }
 
-    btn.addEventListener('click', () => {
-      const open = !card.classList.contains('is-open');
-      // close any other open cards
-      document.querySelectorAll('.person.is-open').forEach(p => {
-        if (p !== card) p.classList.remove('is-open');
-      });
-      card.classList.toggle('is-open', open);
-      btn.setAttribute('aria-expanded', String(open));
-      overlay.setAttribute('aria-hidden', String(!open));
-    });
-  });
+  // Run after people have been rendered
+  document.addEventListener('people:rendered', setupMobileBios);
+
+  // Safety: if the list was already rendered (e.g., fast network), run on DOM ready
+  if (document.readyState !== 'loading') {
+    // small microtask to ensure appended nodes exist
+    queueMicrotask(setupMobileBios);
+  } else {
+    document.addEventListener('DOMContentLoaded', () => queueMicrotask(setupMobileBios));
+  }
 })();
 </script>
-
 
 
 <script>
