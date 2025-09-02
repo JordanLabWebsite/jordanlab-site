@@ -628,15 +628,47 @@ header::after { content: none; }
       @media (max-width: 800px) { .grid { grid-template-columns: 1fr; } .two-col { grid-template-columns: 1fr; } .people-grid { grid-template-columns: repeat(2, 1fr);} .gallery { grid-template-columns: repeat(3, 1fr);} }
       @media (max-width: 600px) { .people-grid { grid-template-columns: 1fr;} .gallery { grid-template-columns: repeat(2, 1fr);} .menu-toggle { display: inline-flex; } .menu { display: none; position: absolute; right: 1.25rem; top: 70px; background: var(--panel); border: 1px solid rgba(148,163,184,.2); border-radius: .8rem; padding: .6rem; flex-direction: column; min-width: 240px; } .menu.open { display: flex; } }
 		
-		/* --- Custom styles for Location/Our Home section --- */
-#location {
+/* Our Home (Location) section with full-bleed background */
+.location {
+  position: relative;
+  /* TODO: update the image path to your desired background */
+  background: url(""images/rfk-building.jpg" center center / cover no-repeat fixed;
+  padding: 4rem 0; /* inherit your .section spacing */
+}
+
+/* Soft dark overlay to keep text legible on bright images */
+.location::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to bottom, rgba(0,0,0,.35), rgba(0,0,0,.35));
+  pointer-events: none;
+}
+
+.location .container { position: relative; z-index: 1; }
+.location h2 { text-align: center; }
+.location p {
+  max-width: 70ch;
+  margin: 0.5rem auto 1.5rem;
   text-align: center;
 }
 
-#location p {
-  max-width: 70ch;
-  margin: 0 auto;
+/* Two-up grid for Our Home images */
+.home-grid {
+  display: grid;
+  gap: 1.25rem;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
 }
+
+/* Phones: stack images */
+@media (max-width: 640px) {
+  .location { 
+    background-attachment: scroll;        /* mobile fix */
+    background-position: center 30%;      /* show a nicer slice on small screens */
+  }
+  .home-grid { grid-template-columns: 1fr; }
+}
+
     </style>
   </head>
   <body>
@@ -763,20 +795,14 @@ header::after { content: none; }
 </section>
 
 		<section id="location" class="section container">
-  <h2>Our Home: The Rose F. Kennedy Center</h2>
+  <h2>Our Home: The Historic Rose F. Kennedy Building</h2>
   <p>
-    The Jordan Lab is based in the <strong>Rose F. Kennedy Center</strong> at 
-    Albert Einstein College of Medicine in the Bronx, New York. 
-    The center was established with the vision and support of the Kennedy family, 
-    and has a long tradition of pioneering research and care in intellectual and 
-    developmental disabilities.
+   In the early 1960s, President John F. Kennedy called for a national effort to improve understanding and treatment of intellectual and developmental disabilities. His vision led to the creation of federally funded research and clinical centers across the country. Albert Einstein College of Medicine was chosen as one of these sites, and in 1966, Rose and Robert Kennedy joined the groundbreaking for the new center that would bear Rose Kennedy’s name. When the building opened its doors in 1970, it became a home for pioneering basic science and clinical programs focused on bridging research on the developing brain with care for children and families. 
+From its earliest days, the Kennedy Building embodied a spirit of discovery linked directly to service, ensuring that research was grounded in the realities of the affected individuals and their families. Today, we carry forward that legacy through cutting-edge neuroscience, genetics, and clinical innovation, committed to the same mission that inspired President Kennedy: to bring hope and progress to individuals with developmental disabilities and their communities.
+
   </p>
 
   <div class="gallery-grid">
-    <figure class="gallery-item">
-      <img src="images/rfk-building.jpg" alt="Rose F. Kennedy Center building" class="gallery-media">
-      <figcaption class="gallery-caption">The Rose F. Kennedy Center today</figcaption>
-    </figure>
     <figure class="gallery-item">
       <img src="images/jfk-founding.jpg" alt="Historical photo of Kennedy family at Einstein" class="gallery-media">
       <figcaption class="gallery-caption">In 1961, JFK issues the first push to advance understanding and treatment of intellectual disabilities </figcaption>
