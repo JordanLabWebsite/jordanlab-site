@@ -865,11 +865,26 @@ header::after { content: none; }
     </main>
 <footer>
   <div class="container">
-    <div style="margin-bottom:1rem;">
-      <img src="images/albert_einstein_college_of_medicine_logo.jpg" alt="Albert Einstein College of Medicine logo" style="height:40px;margin-right:20px;">
-      <img src="images/NIHNINDS.jpg" alt="NIH NINDS logo" style="height:40px;margin-right:20px;">
-		<img src="images/simonsfoundation.jpg" alt="SFARI Simons foundation" style="height:40px">
-    </div>
+  <div style="margin-bottom:1rem;">
+  <a href="https://einsteinmed.edu" target="_blank" rel="noopener">
+    <img src="images/albert_einstein_college_of_medicine_logo.jpg" 
+         alt="Albert Einstein College of Medicine logo" 
+         style="height:40px;margin-right:20px;">
+  </a>
+
+  <a href="https://www.ninds.nih.gov/" target="_blank" rel="noopener">
+    <img src="images/NIHNINDS.jpg" 
+         alt="NIH National Institute of Neurological Disorders and Stroke (NINDS) logo" 
+         style="height:40px;margin-right:20px;">
+  </a>
+
+  <a href="https://www.sfari.org/" target="_blank" rel="noopener">
+    <img src="images/simonsfoundation.jpg" 
+         alt="Simons Foundation Autism Research Initiative (SFARI) logo" 
+         style="height:40px">
+  </a>
+</div>
+
     <div>© <span id="year"></span> JordanLab • Einstein Neuroscience</div>
     <div class="muted" style="margin-top:.5rem">
       Supported by NIH and foundations. Views are those of the authors and do not necessarily represent the views of the NIH.
@@ -1347,6 +1362,12 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 });
 </script>
+	  
+<!-- Cloudflare Web Analytics -->
+	  <script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "ea0cb5b091ee4f1a9d6a7649b63a3a7a"}'>
+	  </script>
+	  <!-- End Cloudflare Web Analytics -->
+	  
     <!--
     🧭 HOW TO USE
     1) Click "Download" on the canvas → save as index.html.
