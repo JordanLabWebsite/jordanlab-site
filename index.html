@@ -541,7 +541,7 @@ header::after { content: none; }
   border-radius: 14px;
   overflow: hidden;
   background: #0f141b;
-  aspect-ratio: 16 / 9;        /* <- choose 16/9 or 1/1 if you prefer squares */
+  aspect-ratio: 16 / 9; overflow: hidden;       /* <- choose 16/9 or 1/1 if you prefer squares */
 }
 
 /* Apply to <img> AND <video> */
@@ -617,9 +617,10 @@ header::after { content: none; }
   height: auto !important;
   max-width: 96vw;
   max-height: 85vh;
+  object-fit: contain !important; /* never crop */
   border-radius: 12px;
   background: #000;
-  object-fit: contain !important; /* never crop */
+
 }
 
 /* Safety overrides in case gallery classes sneak in */
@@ -629,7 +630,7 @@ header::after { content: none; }
   object-fit: contain !important;
 }
 .lb .gallery-item {
-  aspect-ratio: auto !important;
+  aspect-ratio: auto !important; overflow: visible !important;
 }
 
 .lb-cap {
@@ -646,6 +647,8 @@ header::after { content: none; }
   border: 0;
   color: #fff;
   cursor: pointer;
+	z-index:1001;
+	pointer-events: auto;
 }
 
 @media (max-width: 640px) {
@@ -1441,11 +1444,11 @@ document.addEventListener('DOMContentLoaded', () => {
 	  <script> defer src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon="{"token": "ea0cb5b091ee4f1a9d6a7649b63a3a7a"}"
 	  </script>
 	  <!-- End Cloudflare Web Analytics -->
-<!-- Lightbox Modal -->
-<div id="lightbox" class="lb" aria-hidden="true">
-  <button class="lb-close" aria-label="Close (Esc)">×</button>
+
+	  <div id="lightbox" class="lb" aria-hidden="true">
+  <button class="lb-close" type="button" aria-label="Close (Esc)">×</button>
   <div class="lb-body" role="dialog" aria-modal="true">
-    <img id="lb-img" alt="" />
+    <img id="lb-img" alt="">
     <video id="lb-video" controls playsinline></video>
     <div id="lb-cap" class="lb-cap"></div>
   </div>
@@ -1453,38 +1456,32 @@ document.addEventListener('DOMContentLoaded', () => {
 	  
 	<script>
 document.addEventListener('DOMContentLoaded', () => {
-  const lb      = document.getElementById('lightbox');
-  const lbImg   = document.getElementById('lb-img');
+  const lb = document.getElementById('lightbox');
+  const lbImg = document.getElementById('lb-img');
   const lbVideo = document.getElementById('lb-video');
-  const lbCap   = document.getElementById('lb-cap');
-  const lbClose = document.querySelector('.lb-close');
+  const lbCap = document.getElementById('lb-cap');
 
-  // Open from any gallery tile (event delegation)
+  // Open from gallery
   document.getElementById('gallery-grid')?.addEventListener('click', (e) => {
     const fig = e.target.closest('.gallery-item');
     if (!fig) return;
 
-    const media   = fig.querySelector('.gallery-media');  // <img> or <video>
+    const media = fig.querySelector('.gallery-media');  // img or video
     const caption = fig.querySelector('.gallery-caption')?.textContent || '';
 
-    if (!media) return;
-
-    // Reset both views
+    // reset modal media
     lbImg.style.display = 'none'; lbImg.removeAttribute('src');
-    lbVideo.style.display = 'none'; lbVideo.pause(); lbVideo.innerHTML = '';
+    lbVideo.style.display = 'none'; lbVideo.pause(); lbVideo.removeAttribute('poster'); lbVideo.innerHTML = '';
 
-    if (media.tagName === 'IMG') {
-      // Use the SAME src already in the tile (no JSON change needed)
-      lbImg.src = media.src;
+    if (media?.tagName === 'IMG') {
+      lbImg.src = media.src;                 // same file, just displayed with contain
       lbImg.style.display = 'block';
-    } else if (media.tagName === 'VIDEO') {
-      // Clone its <source> children so we play the same file(s) full-size
-      media.querySelectorAll('source').forEach(srcEl => {
+    } else if (media?.tagName === 'VIDEO') {
+      media.querySelectorAll('source').forEach(s0 => {
         const s = document.createElement('source');
-        s.src = srcEl.src; if (srcEl.type) s.type = srcEl.type;
+        s.src = s0.src; if (s0.type) s.type = s0.type;
         lbVideo.appendChild(s);
       });
-      // Copy poster if present
       if (media.poster) lbVideo.poster = media.poster;
       lbVideo.style.display = 'block';
       lbVideo.load();
@@ -1493,19 +1490,22 @@ document.addEventListener('DOMContentLoaded', () => {
 
     lbCap.textContent = caption;
     lb.setAttribute('aria-hidden', 'false');
-    document.body.style.overflow = 'hidden';  // lock background scroll
+    document.body.style.overflow = 'hidden';
   });
 
+  // Close (X or backdrop or Esc)
   function closeLB(){
     lb.setAttribute('aria-hidden', 'true');
     document.body.style.overflow = '';
     lbVideo.pause();
   }
-  lbClose.addEventListener('click', closeLB);
-  lb.addEventListener('click', (e) => { if (e.target === lb) closeLB(); });
+  lb.addEventListener('click', (e) => {
+    if (e.target === lb || e.target.closest('.lb-close')) closeLB();
+  });
   document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeLB(); });
 });
 </script>
+
 
 
   </body>
