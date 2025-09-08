@@ -587,42 +587,16 @@ header::after { content: none; }
     opacity: 1;
   }
 }
-		/* Modal overlay */
-.modal {
-  display: none;           /* Hidden by default */
-  position: fixed;
-  z-index: 1000;
-  inset: 0;
-  background: rgba(0,0,0,0.85);
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  padding: 2rem;
-}
 
-/* Close button */
-.modal-close {
-  position: absolute;
-  top: 1rem;
-  right: 1.5rem;
-  font-size: 2rem;
-  color: #fff;
-  cursor: pointer;
-}
+		/* Lightbox modal */
+.lb{ position:fixed; inset:0; z-index:1000; display:none; background:rgba(0,0,0,.9); }
+.lb[aria-hidden="false"]{ display:block; }
+.lb-body{ position:absolute; inset:0; display:flex; flex-direction:column; align-items:center; justify-content:center; padding:1rem; gap:.75rem; }
+.lb img, .lb video{ max-width:100%; max-height:80vh; border-radius:12px; background:#000; }
+.lb-cap{ color:#ddd; text-align:center; max-width:80ch; }
+.lb-close{ position:absolute; top:.75rem; right:.75rem; font-size:2rem; background:transparent; border:0; color:#fff; cursor:pointer; }
+@media (max-width:640px){ .lb img, .lb video{ max-height:70vh; } .lb-close{ font-size:1.8rem; } }
 
-/* Image/video inside modal */
-.modal-content {
-  max-width: 90%;
-  max-height: 80vh;
-  border-radius: 8px;
-  background: #000;
-}
-
-.modal-caption {
-  margin-top: 1rem;
-  color: #ddd;
-  text-align: center;
-}
 
 
 		/* Scrollable publications box */
@@ -861,13 +835,7 @@ header::after { content: none; }
       </figure>
     </div>
   </div>
-			<!-- Gallery Modal -->
-<div id="gallery-modal" class="modal">
-  <span class="modal-close">&times;</span>
-  <img id="modal-img" class="modal-content" alt="">
-  <video id="modal-video" class="modal-content" controls></video>
-  <div id="modal-caption" class="modal-caption"></div>
-</div>
+
 </section>
 
       <section id="join" class="section container">
@@ -1373,39 +1341,62 @@ document.addEventListener('DOMContentLoaded', () => {
   document.querySelectorAll('.gallery-video[data-autoplay]').forEach(v => io.observe(v));
 })();
 </script>
-	  <script>
+	<script>
 document.addEventListener('DOMContentLoaded', () => {
-  const modal = document.getElementById('gallery-modal');
-  const modalImg = document.getElementById('modal-img');
-  const modalVideo = document.getElementById('modal-video');
-  const caption = document.getElementById('modal-caption');
-  const closeBtn = document.querySelector('.modal-close');
+  const lb      = document.getElementById('lightbox');
+  const lbImg   = document.getElementById('lb-img');
+  const lbVideo = document.getElementById('lb-video');
+  const lbCap   = document.getElementById('lb-cap');
+  const lbClose = document.querySelector('.lb-close');
 
-  document.querySelectorAll('.gallery-item').forEach(item => {
-    item.addEventListener('click', () => {
-      const media = item.querySelector('.gallery-media');
-      caption.textContent = item.querySelector('.gallery-caption')?.textContent || '';
+  // Open from any gallery tile (event delegation)
+  document.getElementById('gallery-grid')?.addEventListener('click', (e) => {
+    const fig = e.target.closest('.gallery-item');
+    if (!fig) return;
 
-      if (media.tagName === 'IMG') {
-        modalImg.src = media.src;
-        modalImg.style.display = 'block';
-        modalVideo.style.display = 'none';
-      } else if (media.tagName === 'VIDEO') {
-        modalVideo.innerHTML = media.innerHTML; // copy <source> children
-        modalVideo.style.display = 'block';
-        modalImg.style.display = 'none';
-      }
+    const media   = fig.querySelector('.gallery-media');  // <img> or <video>
+    const caption = fig.querySelector('.gallery-caption')?.textContent || '';
 
-      modal.style.display = 'flex';
-    });
+    if (!media) return;
+
+    // Reset both views
+    lbImg.style.display = 'none'; lbImg.removeAttribute('src');
+    lbVideo.style.display = 'none'; lbVideo.pause(); lbVideo.innerHTML = '';
+
+    if (media.tagName === 'IMG') {
+      // Use the SAME src already in the tile (no JSON change needed)
+      lbImg.src = media.src;
+      lbImg.style.display = 'block';
+    } else if (media.tagName === 'VIDEO') {
+      // Clone its <source> children so we play the same file(s) full-size
+      media.querySelectorAll('source').forEach(srcEl => {
+        const s = document.createElement('source');
+        s.src = srcEl.src; if (srcEl.type) s.type = srcEl.type;
+        lbVideo.appendChild(s);
+      });
+      // Copy poster if present
+      if (media.poster) lbVideo.poster = media.poster;
+      lbVideo.style.display = 'block';
+      lbVideo.load();
+      lbVideo.play().catch(()=>{});
+    }
+
+    lbCap.textContent = caption;
+    lb.setAttribute('aria-hidden', 'false');
+    document.body.style.overflow = 'hidden';  // lock background scroll
   });
 
-  closeBtn.addEventListener('click', () => modal.style.display = 'none');
-  modal.addEventListener('click', (e) => {
-    if (e.target === modal) modal.style.display = 'none';
-  });
+  function closeLB(){
+    lb.setAttribute('aria-hidden', 'true');
+    document.body.style.overflow = '';
+    lbVideo.pause();
+  }
+  lbClose.addEventListener('click', closeLB);
+  lb.addEventListener('click', (e) => { if (e.target === lb) closeLB(); });
+  document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeLB(); });
 });
 </script>
+
 
 
 	  
@@ -1444,36 +1435,18 @@ document.addEventListener('DOMContentLoaded', () => {
 </script>
 	  
 <!-- Cloudflare Web Analytics -->
-	  <script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "ea0cb5b091ee4f1a9d6a7649b63a3a7a"}'>
+	  <script> defer src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon="{"token": "ea0cb5b091ee4f1a9d6a7649b63a3a7a"}"
 	  </script>
 	  <!-- End Cloudflare Web Analytics -->
-	  
-    <!--
-    🧭 HOW TO USE
-    1) Click "Download" on the canvas → save as index.html.
-    2) Replace placeholder text & images with your lab content.
-    3) To keep images tidy, create an /images folder and update <img src> paths.
+<!-- Lightbox Modal -->
+<div id="lightbox" class="lb" aria-hidden="true">
+  <button class="lb-close" aria-label="Close (Esc)">×</button>
+  <div class="lb-body" role="dialog" aria-modal="true">
+    <img id="lb-img" alt="" />
+    <video id="lb-video" controls playsinline></video>
+    <div id="lb-cap" class="lb-cap"></div>
+  </div>
+</div>
 
-    🚀 HOSTING (so it does NOT run from your computer)
-    A host is just a server on the internet that serves your files to anyone who visits your URL.
-    Good free options:
-      • GitHub Pages: create a repo, add index.html, then in Settings → Pages → set Branch = main. Your site appears at https://<username>.github.io/<repo>/
-      • Netlify: go to app.netlify.com and drag‑and‑drop your folder; Netlify gives you a URL (you can add a custom domain later).
-      • Vercel: vercel.com → "New Project" → import your GitHub repo → Deploy.
-    Your computer is only for editing; the live site is served from these platforms' global servers.
-
-    🧱 STRUCTURE SUGGESTION
-      jordanlab-site/
-        index.html
-        images/
-          team.jpg  microscope.jpg  ...
-        publications.json  (optional)
-
-    📬 Forms
-      Replace the <form action> with a service like Formspree, Getform, Netlify Forms, or your institution's form endpoint.
-
-    🔗 Custom domain (optional)
-      Buy a domain (e.g., jordanlab.org) from any registrar and point it to Netlify/Vercel or use a CNAME for GitHub Pages.
-    -->
   </body>
 </html>
