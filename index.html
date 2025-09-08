@@ -588,16 +588,75 @@ header::after { content: none; }
   }
 }
 
-		/* Lightbox modal */
-.lb{ position:fixed; inset:0; z-index:1000; display:none; background:rgba(0,0,0,.9); }
-.lb[aria-hidden="false"]{ display:block; }
-.lb-body{ position:absolute; inset:0; display:flex; flex-direction:column; align-items:center; justify-content:center; padding:1rem; gap:.75rem; }
-.lb img, .lb video{ max-width:100%; max-height:80vh; border-radius:12px; background:#000; }
-.lb-cap{ color:#ddd; text-align:center; max-width:80ch; }
-.lb-close{ position:absolute; top:.75rem; right:.75rem; font-size:2rem; background:transparent; border:0; color:#fff; cursor:pointer; }
-@media (max-width:640px){ .lb img, .lb video{ max-height:70vh; } .lb-close{ font-size:1.8rem; } }
+/* Lightbox modal */
+.lb {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  display: none;
+  background: rgba(0,0,0,.9);
+}
+.lb[aria-hidden="false"] {
+  display: block;
+}
+.lb-body {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  gap: .75rem;
+}
 
+/* Main image/video in modal */
+.lb img,
+.lb video {
+  width: auto !important;
+  height: auto !important;
+  max-width: 96vw;
+  max-height: 85vh;
+  border-radius: 12px;
+  background: #000;
+  object-fit: contain !important; /* never crop */
+}
 
+/* Safety overrides in case gallery classes sneak in */
+.lb .gallery-media {
+  width: auto !important;
+  height: auto !important;
+  object-fit: contain !important;
+}
+.lb .gallery-item {
+  aspect-ratio: auto !important;
+}
+
+.lb-cap {
+  color: #ddd;
+  text-align: center;
+  max-width: 80ch;
+}
+.lb-close {
+  position: absolute;
+  top: .75rem;
+  right: .75rem;
+  font-size: 2rem;
+  background: transparent;
+  border: 0;
+  color: #fff;
+  cursor: pointer;
+}
+
+@media (max-width: 640px) {
+  .lb img,
+  .lb video {
+    max-height: 70vh;
+  }
+  .lb-close {
+    font-size: 1.8rem;
+  }
+}
 
 		/* Scrollable publications box */
 .pub-scroll {
@@ -1323,7 +1382,6 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 </script>
 
-
 	  <script>
 (function () {
   const io = new IntersectionObserver(entries => {
@@ -1341,6 +1399,58 @@ document.addEventListener('DOMContentLoaded', () => {
   document.querySelectorAll('.gallery-video[data-autoplay]').forEach(v => io.observe(v));
 })();
 </script>
+	  
+
+
+	  
+	  <script>
+document.addEventListener('DOMContentLoaded', () => {
+  const grid = document.getElementById('alumni-grid');
+  if (!grid) return;
+
+  fetch('alumni.json?v=' + Date.now())
+    .then(res => {
+      if (!res.ok) throw new Error('Network ' + res.status);
+      return res.json();
+    })
+    .then(list => {
+      grid.innerHTML = '';
+      list.forEach(p => {
+        const card = document.createElement('article');
+        card.className = 'alumni-card';
+        const src = p.img || 'images/placeholder.jpg';
+       card.innerHTML = `
+  <img src="${src}" alt="${(p.name || 'Alumnus').replace(/"/g,'&quot;')}" loading="lazy">
+  <div class="alumni-name">${p.name || ''}</div>
+  ${p.position ? `<div class="alumni-position">${p.position}</div>` : ''}
+  ${p.location ? `<div class="alumni-location">${p.location}</div>` : ''}
+`;
+
+        grid.appendChild(card);
+      });
+      if (!list.length) grid.innerHTML = '<p class="muted">No alumni listed yet.</p>';
+    })
+    .catch(err => {
+      console.error('Failed to load alumni.json:', err);
+      grid.innerHTML = '<p class="muted">Could not load alumni.</p>';
+    });
+});
+</script>
+	  
+<!-- Cloudflare Web Analytics -->
+	  <script> defer src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon="{"token": "ea0cb5b091ee4f1a9d6a7649b63a3a7a"}"
+	  </script>
+	  <!-- End Cloudflare Web Analytics -->
+<!-- Lightbox Modal -->
+<div id="lightbox" class="lb" aria-hidden="true">
+  <button class="lb-close" aria-label="Close (Esc)">×</button>
+  <div class="lb-body" role="dialog" aria-modal="true">
+    <img id="lb-img" alt="" />
+    <video id="lb-video" controls playsinline></video>
+    <div id="lb-cap" class="lb-cap"></div>
+  </div>
+</div>
+	  
 	<script>
 document.addEventListener('DOMContentLoaded', () => {
   const lb      = document.getElementById('lightbox');
@@ -1397,56 +1507,6 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 </script>
 
-
-
-	  
-	  <script>
-document.addEventListener('DOMContentLoaded', () => {
-  const grid = document.getElementById('alumni-grid');
-  if (!grid) return;
-
-  fetch('alumni.json?v=' + Date.now())
-    .then(res => {
-      if (!res.ok) throw new Error('Network ' + res.status);
-      return res.json();
-    })
-    .then(list => {
-      grid.innerHTML = '';
-      list.forEach(p => {
-        const card = document.createElement('article');
-        card.className = 'alumni-card';
-        const src = p.img || 'images/placeholder.jpg';
-       card.innerHTML = `
-  <img src="${src}" alt="${(p.name || 'Alumnus').replace(/"/g,'&quot;')}" loading="lazy">
-  <div class="alumni-name">${p.name || ''}</div>
-  ${p.position ? `<div class="alumni-position">${p.position}</div>` : ''}
-  ${p.location ? `<div class="alumni-location">${p.location}</div>` : ''}
-`;
-
-        grid.appendChild(card);
-      });
-      if (!list.length) grid.innerHTML = '<p class="muted">No alumni listed yet.</p>';
-    })
-    .catch(err => {
-      console.error('Failed to load alumni.json:', err);
-      grid.innerHTML = '<p class="muted">Could not load alumni.</p>';
-    });
-});
-</script>
-	  
-<!-- Cloudflare Web Analytics -->
-	  <script> defer src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon="{"token": "ea0cb5b091ee4f1a9d6a7649b63a3a7a"}"
-	  </script>
-	  <!-- End Cloudflare Web Analytics -->
-<!-- Lightbox Modal -->
-<div id="lightbox" class="lb" aria-hidden="true">
-  <button class="lb-close" aria-label="Close (Esc)">×</button>
-  <div class="lb-body" role="dialog" aria-modal="true">
-    <img id="lb-img" alt="" />
-    <video id="lb-video" controls playsinline></video>
-    <div id="lb-cap" class="lb-cap"></div>
-  </div>
-</div>
 
   </body>
 </html>
