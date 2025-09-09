@@ -1251,6 +1251,17 @@ document.addEventListener('DOMContentLoaded', () => {
     ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]
   ));
 
+	  // NEW: allow *italic* markdown safely
+  const summaryToHTML = (s) => {
+    const raw = String(s || '');
+    // convert *…* to <em>…</em>
+    const withEm = raw.replace(/\*([^*]+)\*/g, '<em>$1</em>');
+    // escape everything…
+    const escaped = escapeHTML(withEm);
+    // …then unescape only the <em> tags we just created
+    return escaped.replace(/&lt;\/?em&gt;/g, t => t.replace('&lt;','<').replace('&gt;','>'));
+  };
+	
   const grid = document.getElementById('glance-grid');
   fetch('research/research_glance.json?v=' + Date.now())
     .then(r => {
@@ -1278,7 +1289,7 @@ document.addEventListener('DOMContentLoaded', () => {
             <div class="glance-body">
               <div class="glance-title">${escapeHTML(item.title || '')}</div>
               <div class="glance-meta">${pmid ? 'PMID: ' + pmid : ''}</div>
-              ${item.summary ? `<p class="glance-summary">${escapeHTML(item.summary)}</p>` : ''}
+              ${item.summary ? `<p class="glance-summary">${summaryToHTML(item.summary)}</p>` : ''}
             </div>
           </a>
         `;
