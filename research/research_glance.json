@@ -1,10 +1,11 @@
 [
-{
-    "title": "AIDA1 in control of the cytoskeleton",
-    "pmid": "37255534",
-    "img": "images/researchglance/AIDA1Axonend.jpg",
-    "summary": "AIDA-1 regulates actin-based cytoskeletal dynamics"
+  {
+    "title": "AIDA-1 / ANKS1B in an ASD",
+    "pmid": "31388001",
+    "img": "images/researchglance/AIDA1asd.jpeg",
+    "summary": "Monogenic and heterozygous deletions in the <i>ANKS1B</i> gene lead to neurodevelopmental phenotypes."
   },
+
   {
     "title": "Rac in ASD",
     "pmid": "37255534",
@@ -17,12 +18,13 @@
     "img": "images/researchglance/myelininASD.jpg",
     "summary": "Disrupted myelination underlies ANKS1B Neurodevelopmental Syndrome"
   },
-  {
-    "title": "AIDA-1 / ANKS1B in an ASD",
-    "pmid": "31388001",
-    "img": "images/researchglance/AIDA1asd.jpeg",
-    "summary": "Monogenic and heterozygous deletions in ANKS1B lead to neurodevelopmental phenotypes."
+{
+    "title": "AIDA1 in control of the cytoskeleton",
+    "pmid": "37255534",
+    "img": "images/researchglance/AIDA1Axonend.jpg",
+    "summary": "AIDA-1 regulates actin-based cytoskeletal dynamics"
   },
+
   {
     "title": "Myelination as a point of convergence in ASD",
     "pmid": "",
