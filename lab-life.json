@@ -1,0 +1,17 @@
+[
+  {
+    "src": "lab-life/images/001-bench.jpg",
+    "alt": "Bench work with fluorescence scope",
+    "caption": "Imaging day"
+  },
+  {
+    "src": "lab-life/images/002-laser.jpg",
+    "alt": "Laser alignment",
+    "caption": "Microscopy setup"
+  },
+  {
+    "src": "lab-life/images/003-lab-meeting.jpg",
+    "alt": "Lab meeting whiteboard",
+    "caption": "Brainstorming session"
+  }
+]
