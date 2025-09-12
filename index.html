@@ -66,14 +66,17 @@ header::after { content: none; }
   font-size: 1.6rem;           /* smaller */
   color: turquoise;
   font-family: Arial, sans-serif;
+	position: relative;
 }
 
 .brand .logo {
   width: 180px;                  /* ↓ from 100px */
   height: auto;
-  border-radius: 8px;
-}
-
+    display: block;                /* NEW: avoid inline-img baseline gaps */
+  position: relative;            /* NEW */
+	top: 12px; }                    /* NEW: nudges logo down so overflow is below */
+  /* tweak this number (e.g., 8–18px) until it looks perfect */
+		
 .menu a {
   font-size: 1.2rem;              /* ↓ from 1.4rem */
   padding: 0.4rem 0.6rem;
