@@ -1,17 +1,48 @@
 [
   {
-    "src": "lab-life/images/001-bench.jpg",
-    "alt": "Bench work with fluorescence scope",
-    "caption": "Imaging day"
+    "src": "images/Lab-life/annieISN2025.jpg",
+    "alt": "Annie Maguire speech",
+    "caption": "Annie describing her work at ISN/ASN 2025 in NYC"
+  },
+ {
+    "src": "images/Lab-life/protests2025.jpg",
+    "alt": "Einstein neuroscience science protest",
+    "caption": "Tell me what democracy looks like!"
   },
   {
-    "src": "lab-life/images/002-laser.jpg",
-    "alt": "Laser alignment",
-    "caption": "Microscopy setup"
+    "src": "images/Lab-life/vasipresentCSHL2025.jpg",
+    "alt": "Ilana Vasilisa Deyneko science",
+    "caption": "Vasi giving a talk at CSHL 2024"
   },
   {
-    "src": "lab-life/images/003-lab-meeting.jpg",
-    "alt": "Lab meeting whiteboard",
-    "caption": "Brainstorming session"
-  }
+    "src": "images/Lab-life/cshl2024.jpg",
+    "alt": "Jordan lab CSHL",
+    "caption": "Doing what the lab does best"
+  },
+  {
+    "src": "images/Lab-life/anniepdgfra.jpg",
+    "alt": "Annie Maguire",
+    "caption": "Annie reassessing after finding her \"oligo-specific\" cre drivers, weren't"
+  },
+  {
+    "src": "images/Lab-life/halloween2024.jpg",
+    "alt": "Einstein neuroscience halloween",
+    "caption": "We were supposed to be organelles"
+  },
+ {
+    "src": "images/Lab-life/jennymasters2024.jpg",
+    "alt": "Jenny Diaz Rodriguez",
+    "caption": "Jenny rocking a masters"
+  },
+ {
+    "src": "images/Lab-life/Hiking2024.jpg",
+    "alt": "Jordan Lab goes hiking",
+    "caption": "The Jordan Lab goes hiking"
+  },
+ {
+    "src": "images/Lab-life/desertmichingan2022.jpg",
+    "alt": "Jordan Lab goes hiking",
+    "caption": "Who knew there was a desert in Michigan- Great Lakes glia 2022"
+  },
+
 ]
