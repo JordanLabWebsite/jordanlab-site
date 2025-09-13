@@ -1,28 +1,28 @@
 [
   {
-    "title": "AIDA-1 / ANKS1B in an ASD",
+    "title": "*ANKS1B* encoded AIDA-1 in an ASD",
     "pmid": "31388001",
     "img": "images/researchglance/AIDA1asd.jpeg",
     "summary": "Monogenic and heterozygous deletions in the *ANKS1B* gene lead to neurodevelopmental phenotypes."
   },
 
   {
-    "title": "Rac in ASD",
+    "title": "Rac1 activity in oligodendrocyte function",
     "pmid": "37255534",
     "img": "images/researchglance/Rac1asd.jpg",
     "summary": "Diverse ASD-linked genes regulate Rac1 activity"
   },
   {
-    "title": "Myelination in neurodevelopmental disorders",
+    "title": "Myelination in Neurodevelopmental Disorders",
     "pmid": "38129387",
     "img": "images/researchglance/myelininASD.jpg",
     "summary": "Disrupted myelination underlies *ANKS1B* Neurodevelopmental Syndrome"
   },
 {
     "title": "AIDA1 in control of the cytoskeleton",
-    "pmid": "37255534",
+    "pmid": "",
     "img": "images/researchglance/AIDA1Axonend.jpg",
-    "summary": "AIDA-1 regulates actin-based cytoskeletal dynamics"
+    "summary": "AIDA-1 regulates actin-based cytoskeletal dynamics at growth cones"
   },
 
   {

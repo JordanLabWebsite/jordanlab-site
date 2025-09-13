@@ -70,7 +70,7 @@ header::after { content: none; }
 }
 
 .brand .logo {
-  width: 180px;                  /* ↓ from 100px */
+  width: 140px;                  /* ↓ from 100px */
   height: auto;
     display: block;                /* NEW: avoid inline-img baseline gaps */
   position: relative;            /* NEW */
@@ -818,6 +818,12 @@ header::after { content: none; }
   max-width: 70ch;
   margin: 0.5rem auto 1.5rem;
   text-align: center;
+  font-size: clamp(1.1rem, 2.2vw, 1.2rem); /* scales with screen size */
+  font-weight: 600;                    /* bolder */
+  color: #fff;                         /* white text for contrast */
+  text-shadow:   0 2px 6px rgba(0,0,0,0.7),   /* dark glow */
+    0 0 4px rgba(0,0,0,0.5);     /* soft halo */
+  margin-bottom: 1rem;}
 }
 
 /* Use your existing gallery cards but make the grid 2-up here */
@@ -825,7 +831,14 @@ header::after { content: none; }
   display: grid;
   gap: 1.25rem;
   grid-template-columns: repeat(2, minmax(0, 1fr));
+  justify-items: center;   /* center items horizontally in their cell */
+  align-items: center;     /* center items vertically if cell taller */
 }
+.location .gallery-grid img {
+  display: block;
+  margin: 0 auto;          /* extra safeguard */
+  max-width: 100%;         /* keep images responsive */
+  height: auto;
 
 /* Phones: stack images; avoid fixed backgrounds on mobile */
 @media (max-width: 640px) {
@@ -862,7 +875,7 @@ header::after { content: none; }
     <header>
       <div class="container nav">
         <a class="brand" href="#home" aria-label="Home">
-          <img class="logo" src="images/lablogo.png" alt="Jordan Lab logo"/>
+          <img class="logo" src="images/lablogo.png" alt="Jordan Brain Lab logo"/>
  
         </a>
         <button class="menu-toggle" aria-label="Open menu" aria-controls="nav-menu" aria-expanded="false">☰</button>
@@ -886,9 +899,10 @@ header::after { content: none; }
 				 <div class="hero-glass">
   <p> We study how oligodendrocytes, myelination, and neuron–glia interactions 
     shape circuit development and neurodevelopmental disorders.&nbsp;</p>
-  <p>&nbsp;Department of Neuroscience • Albert Einstein College of Medicine. Bronx, NY, USA. </p>
+  <p>&nbsp;Albert Einstein College of Medicine • Department of Neuroscience • Bronx • NY • USA </p>
 				</div>
 <div class="cta-grid">
+	
   <!-- Publications -->
   <div class="cta-item">
       <a class="btn primary" href="#publications">
@@ -899,6 +913,16 @@ header::after { content: none; }
       </p>
     </div>
 
+	  <!-- People -->
+    <div class="cta-item">
+      <a class="btn primary" href="#people" target="_blank" rel="noopener">
+        See our Team
+      </a>
+      <p class="muted">
+        Learn about the scientists in our team
+      </p>
+    </div>
+	
     <!-- Rare Genetic Disorders -->
     <div class="cta-item">
       <a class="btn primary" href="https://www.youtube.com/watch?v=At2dfsB_0jw" target="_blank" rel="noopener">
@@ -909,15 +933,7 @@ header::after { content: none; }
       </p>
     </div>
 
-    <!-- IDD Gene Team -->
-    <div class="cta-item">
-      <a class="btn primary" href="#people" target="_blank" rel="noopener">
-        See our Team
-      </a>
-      <p class="muted">
-        Learn about the scientists in our team
-      </p>
-    </div>
+  
 	  </div>
   </div>
 </section>
@@ -984,13 +1000,10 @@ header::after { content: none; }
 		<section id="location" class="location section">
   <div class="container">
     <h2>Our Home: The Historic Rose F. Kennedy Building</h2>
-    <p>
-      In the early 1960s, President John F. Kennedy called for a national effort to improve understanding and treatment of intellectual and developmental disabilities. His vision led to the creation of federally funded research and clinical centers across the country. Albert Einstein College of Medicine was chosen as one of these sites, and in 1966, Rose and Robert Kennedy joined the groundbreaking for the new center that would bear Rose Kennedy’s name. When the building opened its doors in 1970, it became a home for pioneering basic science and clinical programs focused on bridging research on the developing brain with care for children and families. 
-      From its earliest days, the Kennedy Building embodied a spirit of discovery linked directly to service, ensuring that research was grounded in the realities of the affected individuals and their families. Today, we carry forward that legacy through cutting-edge neuroscience, genetics, and clinical innovation, committed to the same mission that inspired President Kennedy: to bring hope and progress to individuals with developmental disabilities and their communities.
-    </p>
-
-    <div class="gallery-grid">
-      <figure class="gallery-item">
+    <p>In the early 1960s, President John F. Kennedy called for a national effort to improve understanding and treatment of intellectual and developmental disabilities. His vision led to the creation of federally funded research and clinical centers across the country. Albert Einstein College of Medicine was chosen as one of these sites, and in 1966, Rose and Robert Kennedy joined the groundbreaking for the new center that would bear Rose Kennedy’s name. When the building opened its doors in 1970, it became a home for pioneering basic science and clinical programs focused on bridging research on the developing brain with care for children and families. 
+      From its earliest days, the Kennedy Building embodied a spirit of discovery linked directly to service, ensuring that research was grounded in the realities of the affected individuals and their families. Today, we carry forward that legacy through cutting-edge neuroscience, genetics, and clinical innovation, committed to the same mission that inspired President Kennedy: to bring hope and progress to individuals with developmental disabilities and their communities. </p>
+<div class="gallery-grid">
+  <figure class="gallery-item">
         <img src="images/jfk-founding.jpg" alt="Historical photo of Kennedy family at Einstein" class="gallery-media">
         <figcaption class="gallery-caption">In 1961, JFK issues the first push to advance understanding and treatment of intellectual disabilities</figcaption>
       </figure>
@@ -998,7 +1011,7 @@ header::after { content: none; }
         <img src="images/kennedy-founders.jpg" alt="Historical photo of Kennedy family at Einstein" class="gallery-media">
         <figcaption class="gallery-caption">Rose and Robert Kennedy attend the groundbreaking of the Kennedy Center at the Albert Einstein College of Medicine</figcaption>
       </figure>
-    </div>
+</div>
   </div>
 
 </section>
