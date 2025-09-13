@@ -1666,7 +1666,7 @@ document.addEventListener('DOMContentLoaded', () => {
   // If your JSON only contains filenames, set a base path:
   // const BASE = 'images/Lab-life/';
 
-  fetch('lab-life/lab-life.json?v=' + Date.now())
+  fetch('lab-life.json?v=' + Date.now())
     .then(r => {
       if (!r.ok) throw new Error('Failed to load lab-life.json (' + r.status + ')');
       return r.json();
