@@ -12,7 +12,7 @@
 
     <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='0.9em' font-size='90'>🧠</text></svg>">
 
-    <style>
+    figure.className<style>
       :root {
         --bg: #0b0c10;
         --panel: #14161b;
@@ -850,66 +850,30 @@ header::after { content: none; }
   }
   .location .gallery-grid { grid-template-columns: 1fr; }
 }
-	/* Container: place on your #lablife-grid element */
+/* Container: a simple responsive grid that centers items */
 #lablife-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
   gap: 1.1rem;
-  align-items: start;
+  justify-items: center; /* centers cards within their grid cell */
 }
 
-/* Card */
+/* Cap each card’s width so images can’t go huge */
 .lablife-card {
-  position: relative;
-  background: transparent; /* let images “float” */
-  border-radius: 14px;
-  overflow: visible; /* allow slight overlap */
-  z-index: 0;
-  transition: transform 180ms ease;
+  width: 100%;
+  max-width: 320px;         /* ← tweak this number to taste */
+  margin: 0 auto;
 }
 
-/* Media */
+/* Ensure the image respects the cap and stays responsive */
+.lablife-card img,
 .lablife-media {
+  display: block;
   width: 100%;
   height: auto;
-  max-width: 320px;    /* 👈 adjust this to taste */
   border-radius: 14px;
   box-shadow: 0 4px 18px rgba(0,0,0,0.25);
-  margin-left: auto;   /* center in card */
-  margin-right: auto;
-  display: block;
 }
-
-/* Caption */
-.lablife-caption {
-  margin-top: 0.5rem;
-  font-size: 0.95rem;
-  line-height: 1.35;
-  color: #cfd8e3;
-  background: rgba(15,20,27,0.7);     /* legible on dark */
-  backdrop-filter: blur(2px);
-  padding: 0.5rem 0.65rem;
-  border-radius: 10px;
-}
-
-/* Stagger rules (tweak values to taste) */
-#lablife-grid .lablife-card:nth-child(6n+1) { transform: translateY(8%); z-index: 1; }
-#lablife-grid .lablife-card:nth-child(6n+3) { transform: translateY(-6%); z-index: 2; }
-#lablife-grid .lablife-card:nth-child(6n+5) { transform: translateY(5%);  z-index: 1; }
-
-/* Hover lift (optional) */
-#lablife-grid .lablife-card:hover { transform: translateY(-2%) scale(1.01); z-index: 3; }
-
-/* Mobile: tone down the stagger so nothing crowds */
-@media (max-width: 640px) {
-  #lablife-grid .lablife-card { transform: none !important; }
-}
-
-/* Respect motion preferences */
-@media (prefers-reduced-motion: reduce) {
-  #lablife-grid .lablife-card { transition: none; transform: none !important; }
-}
-
 
 
 .skip {
