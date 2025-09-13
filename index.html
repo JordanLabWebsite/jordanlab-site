@@ -870,11 +870,14 @@ header::after { content: none; }
 
 /* Media */
 .lablife-media {
-  display: block;
   width: 100%;
   height: auto;
+  max-width: 320px;    /* 👈 adjust this to taste */
   border-radius: 14px;
   box-shadow: 0 4px 18px rgba(0,0,0,0.25);
+  margin-left: auto;   /* center in card */
+  margin-right: auto;
+  display: block;
 }
 
 /* Caption */
