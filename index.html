@@ -5,8 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
 	  <link rel="preload" as="image" href="images/Background.jpg">
 
-    <title>JordanBrainLab • Neuroscience at Albert Einstein College of Medicine</title>
-    <meta name="description" content="JordanLab investigates how oligodendrocytes, myelination, and circuit development shape brain function and neurodevelopmental disorders." />
+    <title>Bryen Jordan, PhD | JordanBrainLab • Neuroscience at Albert Einstein College of Medicine</title>
+    <meta name="description" content="The Jordan Brain Lab, directed by Dr. Bryen Jordan, investigates oligodendrocytes, myelination, and neurodevelopmental disorders." />
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+ExtraCondensed:wght@700&display=swap" rel="stylesheet">
 
     <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='0.9em' font-size='90'>🧠</text></svg>">
@@ -163,6 +163,7 @@ header::after { content: none; }
   }
   .hero p{
     font-size: clamp(0.98rem, 3.5vw, 1.1rem);
+	font-weight: 800;
   }
 }
 /* Base “glass” container: no blur here, just positioning + light tint */
@@ -961,7 +962,7 @@ header::after { content: none; }
 			<div class="container">
 <h1>JORDAN BRAIN LAB</h1>
 				 <div class="hero-glass">
-  <p> We study how oligodendrocytes, myelination, and neuron–glia interactions 
+  <p> We study how synapses, gene expression, oligodendrocytes, and myelination,
     shape circuit development and neurodevelopmental disorders.&nbsp;</p>
   <p>&nbsp;Albert Einstein College of Medicine • Department of Neuroscience • Bronx • NY • USA </p>
 				</div>
@@ -973,7 +974,7 @@ header::after { content: none; }
         View Our Publications
       </a>
       <p class="muted">
-        Explore our published work on neurons, oligodendrocytes, and circuit plasticity.
+        Explore our published work on neurons, synaptic function, oligodendrocytes, and disease.
       </p>
     </div>
 
@@ -1193,17 +1194,26 @@ document.addEventListener('DOMContentLoaded', () => {
     ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]
   ));
 
+  const altText = (p) => {
+    const a = (p.alt || '').trim();
+    if (a) return a;
+    if (p.name && String(p.name).trim()) return `${p.name} portrait`;
+    return 'Lab member portrait';
+  };
+
   fetch('people/people.json?v=' + Date.now())
     .then(r => { if (!r.ok) throw new Error(r.status); return r.json(); })
     .then(list => {
       grid.innerHTML = '';
       list.forEach(p => {
-        const img = p.img || 'images/placeholder.jpg';
+        const src = p.img ? String(p.img) : 'images/placeholder.jpg';
         const card = document.createElement('article');
         card.className = 'person';
+        card.setAttribute('aria-label', `${p.name || 'Lab member'}${p.role ? ', ' + p.role : ''}`);
+
         card.innerHTML = `
   <div class="person-media">
-    <img src="${esc(p.img)}" alt="${esc(p.alt || (p.name + ' portrait'))}" loading="lazy">
+    <img src="${esc(src)}" alt="${esc(altText(p))}" loading="lazy">
     ${p.bio ? `<div class="person-overlay">${esc(p.bio)}</div>` : ''}
   </div>
   <div class="p-name">${esc(p.name || '')}</div>
@@ -1211,11 +1221,11 @@ document.addEventListener('DOMContentLoaded', () => {
   ${p.interest ? `<div class="p-interest">${esc(p.interest)}</div>` : ''}
   ${p.bio ? `<button type="button" class="bio-toggle" aria-expanded="false">Bio</button>` : ''}
 `;
-
         grid.appendChild(card);
       });
+
       if (!list.length) grid.innerHTML = '<p class="muted">No lab members listed yet.</p>';
-	  document.dispatchEvent(new CustomEvent('people:rendered'));
+      document.dispatchEvent(new CustomEvent('people:rendered'));
     })
     .catch(err => {
       console.error('people.json error:', err);
@@ -1223,6 +1233,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 });
 </script>
+
 	  <script>
 (function () {
   const isTouch = window.matchMedia && window.matchMedia('(hover: none) and (pointer: coarse)').matches;
@@ -1576,7 +1587,7 @@ document.addEventListener('DOMContentLoaded', () => {
         card.className = 'alumni-card';
         const src = p.img || 'images/placeholder.jpg';
        card.innerHTML = `
-  <img src="${src}" alt="${(p.name || 'Alumnus').replace(/"/g,'&quot;')}" loading="lazy">
+   <img src="${src}" alt="${((p.alt || p.name || 'Lab alumnus')).replace(/"/g,'&quot;')}" loading="lazy">
   <div class="alumni-name">${p.name || ''}</div>
   ${p.position ? `<div class="alumni-position">${p.position}</div>` : ''}
   ${p.location ? `<div class="alumni-location">${p.location}</div>` : ''}

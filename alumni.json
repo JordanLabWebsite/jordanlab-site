@@ -1,12 +1,72 @@
 [
-  { "name": "Ilana \"Vasi\" Deyneko, PhD", "img": "images/alumni/vasi.jpg", "position": " ", "location": " " },
-  { "name": "Abigail \"B\" Carbonell, MD, PhD", "img": "images/alumni/abigail.jpg", "position": "Child Neurology Resident", "location": "Columbia University Medical College" },
-  { "name": "Changhoon Cho, PhD", "img": "images/alumni/changhoon.jpg", "position": "Scientist", "location": "Genentech" },
-  { "name": "Juan Vazquez, MD",    "img": "images/alumni/juan.jpg", "position": "Neurology Resident", "location": "Johns Hopkins Medicine" },
-  { "name": "Mathew Klein, MD, PhD",    "img": "images/alumni/matt.jpg", "position": "Director-Clinical Leader Neuroscience", "location": "The Janssen Pharmaceutical Company" },
-  { "name": "Jaafar Tindi, PhD", "img": "images/alumni/jaafar.jpg", "position": " Postdoctoral Associate", "location": "Albert Einstein College of Medicine" },
-  { "name": "Dana Kravchick, MD, PhD", "img": "images/alumni/dana.jpg", "position": " ", "location": " " },
-  { "name": "Carmen Freire Cobo, PhD, PharmD",    "img": "images/alumni/carmen.jpg", "position": "Instructor", "location": "Mount Sinai School of Medicine"  },
-  { "name": "Erika Calvo-Ochoa, PhD",     "img": "images/alumni/erika.jpg", "position": "Assistant Professor of Biology and Neuroscience", "location": "Hope College" },
-  { "name": "Svetlana Cvejic, PhD",    "img": "images/alumni/svetlana.jpg", "position": "Senior Director- Research Programs", "location": "Parkinson's Foundation"  }
+  {
+    "name": "Ilana \"Vasi\" Deyneko, PhD",
+    "img": "images/alumni/vasi.jpg",
+    "position": " ",
+    "location": " ",
+    "alt": "Ilana Vasilisa Deyneko, PhD—former Jordan Lab member"
+  },
+  {
+    "name": "Abigail \"B\" Carbonell, MD, PhD",
+    "img": "images/alumni/abigail.jpg",
+    "position": "Child Neurology Resident",
+    "location": "Columbia University Medical College",
+    "alt": "Abigail “B” Carbonell, MD, PhD—Child Neurology Resident at Columbia University Medical College"
+  },
+  {
+    "name": "Changhoon Cho, PhD",
+    "img": "images/alumni/changhoon.jpg",
+    "position": "Scientist",
+    "location": "Genentech",
+    "alt": "Changhoon Cho, PhD—Scientist at Genentech"
+  },
+  {
+    "name": "Juan Vazquez, MD",
+    "img": "images/alumni/juan.jpg",
+    "position": "Neurology Resident",
+    "location": "Johns Hopkins Medicine",
+    "alt": "Juan Vazquez, MD—Neurology Resident at Johns Hopkins Medicine"
+  },
+  {
+    "name": "Mathew Klein, MD, PhD",
+    "img": "images/alumni/matt.jpg",
+    "position": "Director-Clinical Leader Neuroscience",
+    "location": "The Janssen Pharmaceutical Company",
+    "alt": "Mathew Klein, MD, PhD—Director-Clinical Leader Neuroscience at The Janssen Pharmaceutical Company"
+  },
+  {
+    "name": "Jaafar Tindi, PhD",
+    "img": "images/alumni/jaafar.jpg",
+    "position": " Postdoctoral Associate",
+    "location": "Albert Einstein College of Medicine",
+    "alt": "Jaafar Tindi, PhD—Postdoctoral Associate at Albert Einstein College of Medicine"
+  },
+  {
+    "name": "Dana Kravchick, MD, PhD",
+    "img": "images/alumni/dana.jpg",
+    "position": " ",
+    "location": " ",
+    "alt": "Dana Kravchick, MD, PhD—former Jordan Lab member"
+  },
+  {
+    "name": "Carmen Freire Cobo, PhD, PharmD",
+    "img": "images/alumni/carmen.jpg",
+    "position": "Instructor",
+    "location": "Mount Sinai School of Medicine",
+    "alt": "Carmen Freire Cobo, PhD, PharmD—Instructor at Mount Sinai School of Medicine"
+  },
+  {
+    "name": "Erika Calvo-Ochoa, PhD",
+    "img": "images/alumni/erika.jpg",
+    "position": "Assistant Professor of Biology and Neuroscience",
+    "location": "Hope College",
+    "alt": "Erika Calvo-Ochoa, PhD—Assistant Professor of Biology and Neuroscience at Hope College"
+  },
+  {
+    "name": "Svetlana Cvejic, PhD",
+    "img": "images/alumni/svetlana.jpg",
+    "position": "Senior Director- Research Programs",
+    "location": "Parkinson's Foundation",
+    "alt": "Svetlana Cvejic, PhD—Senior Director, Research Programs at the Parkinson’s Foundation"
+  }
 ]
