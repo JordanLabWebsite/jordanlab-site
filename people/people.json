@@ -9,6 +9,7 @@
     "bio": "Bryen Jordan performed his postdoctoral work at NYU Langone School of Medicine in the lab of HHMI member Dr. Edward Ziff, where he characterized the proteomic composition of synapses and elucidated a novel synapse-to-nucleus signaling pathway. Bryen obtained his PhD in Pharmacology from NYU School of Medicine, under the mentorship of Lakshmi Devi, studying Opioid receptor dimerization and its effects on pharmacology. Prior to this, Bryen obtained his undergraduate degree in Chemical Engineering at Rensselaer Polytechnic Institute"
   },
   {
+<<<<<<< HEAD
     "name": "Anne \"Annie\" Maguire, DVM, PhD",
     "role": "Postdoctoral Fellow",
     "img": "images/people/annie.jpg",
@@ -23,6 +24,13 @@
     "alt": "Sarah Goebel, PhD – Postdoctoral Fellow investigating glial contributions to autism spectrum disorders",
     "interest": "Glial contributions to ASD: are myelin deficits primary drivers?",
     "bio": "We are excited to welcome Dr. Sarah Goebel as a newly appointed research fellow supported by the IDDRC T32 training grant. Sarah brings with her a strong foundation in neuroscience, communication, and advocacy, and she is now shifting her focus to investigate autism spectrum disorders (ASD). As a T32 fellow, Sarah is investigating the hypothesis that deficits in oligodendrocyte function and disruptions in myelination are not secondary features but primary contributors to the diverse ASD. Her work seeks to uncover how altered glial function may drive the neurological and behavioral symptoms seen across the autism spectrum, with the potential to identify new therapeutic targets."
+=======
+    "name": "Ana Cicvaric, PhD",
+    "role": "Instructor",
+    "img": "images/people/cicvaric.jpg",
+    "interest": "Myelin pathology as a causal mechanism in NDD; pro-myelinating therapies.",
+    "bio": "My research focuses on how disruptions in myelination contribute to neurodevelopmental disorders, particularly autism spectrum disorders (ASD). Building on evidence that myelin dynamically regulates neural circuit function, we hypothesize that deficits in oligodendrocyte development and myelin formation are key drivers of ASD-related phenotypes rather than secondary consequences. Using high-confidence ASD mouse models, we link cellular mechanisms to behavioral outcomes by investigating how loss of ASD-associated proteins impacts oligodendrocyte development, myelin structure, neural signaling, and behavior. In parallel, we test whether pharmacological strategies that promote myelination, such as clemastine, can restore myelin integrity and rescue disease-relevant phenotypes. By connecting glial biology to circuit dysfunction, this work aims to uncover fundamental disease mechanisms and identify new therapeutic opportunities"
+>>>>>>> 4cdf9c8 (Update lab members and alumni)
   },
   {
     "name": "Dylann Cordova-Martinez, MS",

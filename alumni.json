@@ -1,4 +1,5 @@
 [
+<<<<<<< HEAD
   {
     "name": "Ilana \"Vasi\" Deyneko, PhD",
     "img": "images/alumni/vasi.jpg",
@@ -69,4 +70,18 @@
     "location": "Parkinson's Foundation",
     "alt": "Svetlana Cvejic, PhD—Senior Director, Research Programs at the Parkinson’s Foundation"
   }
+=======
+{ "name": "Sarah Goebel, PhD", "img": "images/alumni/SarahG.jpg", "position": "Scientific Communication Lead", "location": "STAR Foundation" },  
+{ "name": "Anne (\"Annie\") Maguire, DVM, PhD", "img": "images/alumni/annie.jpg", "position": " ", "location": " " },
+  { "name": "Ilana (\"Vasi\") Deyneko, PhD", "img": "images/alumni/vasi.jpg", "position": " ", "location": " " },
+  { "name": "Abigail (\"B\") Carbonell, MD, PhD", "img": "images/alumni/abigail.jpg", "position": "Child Neurology Resident", "location": "Columbia University Medical College" },
+  { "name": "Changhoon Cho, PhD", "img": "images/alumni/changhoon.jpg", "position": "Scientist", "location": "Genentech" },
+  { "name": "Juan Vazquez, MD",    "img": "images/alumni/juan.jpg", "position": "Neurology Resident", "location": "Johns Hopkins Medicine" },
+  { "name": "Mathew Klein, MD, PhD",    "img": "images/alumni/matt.jpg", "position": "Director-Clinical Leader Neuroscience", "location": "The Janssen Pharmaceutical Company" },
+  { "name": "Jaafar Tindi, PhD", "img": "images/alumni/jaafar.jpg", "position": " Postdoctoral Associate", "location": "Albert Einstein College of Medicine" },
+  { "name": "Dana Kravchick, MD, PhD", "img": "images/alumni/dana.jpg", "position": " ", "location": " " },
+  { "name": "Erika Calvo-Ochoa, PhD",     "img": "images/alumni/erika.jpg", "position": "Assistant Professor of Biology and Neuroscience", "location": "Hope College" },
+  { "name": "Carmen Freire Cobo, PhD, PharmD",    "img": "images/alumni/carmen.jpg", "position": "Instructor", "location": "Mount Sinai School of Medicine"  },
+  { "name": "Svetlana Cvejic, PhD",    "img": "images/alumni/svetlana.jpg", "position": "Director- Research Programs", "location": "The Parkinson's Foundation"  }
+>>>>>>> 4cdf9c8 (Update lab members and alumni)
 ]
